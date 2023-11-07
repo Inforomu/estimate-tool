@@ -1,10 +1,18 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
 
   return (
     <>
-      <h1>Application Finale</h1>
-    </>
+    {/* TEST a supprimé*/}
+    <h1>Application final</h1>
+    <h2 className=" bg-yellow-400">Tailwind</h2>
+    <BrowserRouter>
+      <Routes>
+        {/*<Route /> */}
+      </Routes>
+    </BrowserRouter>
+  </>
   )
 }
 
