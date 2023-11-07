@@ -1,18 +1,55 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAtom } from 'jotai';
+import { userAtom } from './Atom';
+import Cookies from 'js-cookie';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import NotFoundPage from './pages/NotFoundPage';
 import FormDevis from "./pages/FormDevis";
 
 function App() {
+  const [user, setUser] = useAtom(userAtom);
 
-  	return (
-    	<>
-    		<h1>Application final</h1>
-    		<h2 className=" bg-yellow-400">Tailwind</h2>
-    		<BrowserRouter>
-      			<Routes>
-				  <Route path="/formdevis" element={<FormDevis />} />
-      			</Routes>
-    		</BrowserRouter>
-  		</>
+
+  useEffect(() => {
+    const token = Cookies.get('token');
+
+    if (token) {
+      setUser({
+        isLogged: true,
+      });
+    } else {
+      setUser({
+        isLogged: false,
+      });
+      Cookies.remove('token');
+      Cookies.remove('id');
+      Cookies.remove('email');
+    }
+  }, []);
+
+  return (
+    <BrowserRouter>
+    <main>
+      <Routes>
+        {user.isLogged ? (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Navigate to="/" />} />
+            <Route path="/formdevis" element={<FormDevis />} />
+          </>
+        ) : (
+          <>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Signin />} />
+          </>
+        )}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </main>
+  </BrowserRouter>
   )
 }
 
