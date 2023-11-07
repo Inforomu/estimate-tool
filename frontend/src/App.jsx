@@ -1,18 +1,54 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAtom } from 'jotai';
+import { userAtom } from './Atom';
+import Cookies from 'js-cookie';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
+  const [user, setUser] = useAtom(userAtom);
+
+
+  useEffect(() => {
+    const token = Cookies.get('token');
+
+    if (token) {
+      setUser({
+        isLogged: true,
+      });
+    } else {
+      setUser({
+        isLogged: false,
+      });
+      Cookies.remove('token');
+      Cookies.remove('id');
+      Cookies.remove('email');
+    }
+  }, []);
 
   return (
-    <>
-    {/* TEST a supprimé*/}
-    <h1>Application final</h1>
-    <h2 className=" bg-yellow-400">Tailwind</h2>
     <BrowserRouter>
+    <main>
       <Routes>
-        {/*<Route /> */}
+        {user.isLogged ? (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Navigate to="/" />} />
+            <Route path="/formdevis" element={<FormDevis />} />
+          </>
+        ) : (
+          <>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Signin />} />
+          </>
+        )}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
-  </>
+    </main>
+  </BrowserRouter>
   )
 }
 

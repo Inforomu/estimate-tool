@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -18,15 +16,16 @@
     -webkit-text-size-adjust: 100%;
 }
 
-// TEST a supprimé
-
 body {
     background-color: #c4cbc6;
     opacity: 1;
     background-image: radial-gradient(#44f74d 0.55px, #d1d4d1 0.55px);
     background-size: 11px 11px;
-    h1 {
-        background: red;
-        color: rgb(0, 149, 255);
+    min-height: 100vh;
+    main {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
