@@ -1,6 +1,9 @@
 const express = require('express');
 
 const userRoutes = require('./routes/user');
+const imgToDatabase = require('./routes/saveImgDevis')
+const formDevisToDataBase = require('./routes/formDevis')
+
 
 const app = express();
 
@@ -13,6 +16,9 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.use('/api/auth', userRoutes);
+app.use('/api/uploadimg', imgToDatabase);
+app.use('/api/uploadformdevis', formDevisToDataBase);
 
 module.exports = app;

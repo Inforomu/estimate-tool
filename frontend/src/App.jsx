@@ -7,6 +7,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import NotFoundPage from './pages/NotFoundPage';
+import FormDevis from "./pages/FormDevis";
 
 function App() {
   const [user, setUser] = useAtom(userAtom);
