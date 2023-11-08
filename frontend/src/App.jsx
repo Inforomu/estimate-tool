@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 import NotFoundPage from './pages/NotFoundPage';
 import FormDevis from "./pages/FormDevis";
+import FormClient from './pages/FormClient';
 
 function App() {
   const [user, setUser] = useAtom(userAtom);
@@ -39,6 +40,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Navigate to="/" />} />
             <Route path="/formdevis" element={<FormDevis />} />
+            <Route path="/formclient" element={<FormClient />} />
           </>
         ) : (
           <>
