@@ -25,29 +25,30 @@ class DevisData {
     async save() {
         const sql = `
         INSERT INTO Devis (
-            power_contract, power_yg
+            power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging,
+            charge_points, box_nb
         )
-        VALUES(?, ?)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         const values = [
             this.power_contract,
             this.power_yg,
-            // this.contract,
-            // this.electric_controller,
-            // this.telereport,
-            // this.wifi,
-            // this.mobile,
-            // this.ground_res,
-            // this.neutral_system,
-            // this.breaker,
-            // this.distance,
-            // this.secure,
-            // this.type_e,
-            // this.dispo_td,
-            // this.power_charging,
-            // this.charge_points,
-            // this.box_nb
+            this.contract,
+            this.electric_controller,
+            this.telereport,
+            this.wifi,
+            this.mobile,
+            this.ground_res,
+            this.neutral_system,
+            this.breaker,
+            this.distance,
+            this.secure,
+            this.type_e,
+            this.dispo_td,
+            this.power_charging,
+            this.charge_points,
+            this.box_nb
         ];
 
         try {
