@@ -1,7 +1,7 @@
 const db = require('../config/db');
 
 class Client {
-  constructor(prenom, nom, email, phone, city, zip_code, adresse, userId) {
+  constructor(prenom, nom, email, phone, city, zip_code, adresse, description, userId) {
 
     this.prenom = prenom;
     this.nom = nom;
@@ -10,12 +10,13 @@ class Client {
     this.city = city;
     this.zip_code = zip_code;
     this.adresse = adresse;
+    this.description = description;
     this.userId = userId;
   }
   async save() {
 
     let sql = `
-        INSERT INTO Client(
+        INSERT INTO Clients(
             prenom,
             nom,
             email,
@@ -23,9 +24,10 @@ class Client {
             ville,
             zipcode,
             adresse,
+            description,
             author_id
         )
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
     const values = [
@@ -36,12 +38,29 @@ class Client {
       this.city,
       this.zip_code,
       this.adresse,
+      this.description,
       this.userId
     ];
 
     try {
       const result = await db.execute(sql, values)
       return result
+    } catch (error) {
+      throw error
+    }
+  }
+
+  static async find() {
+    let sql = `
+    SELECT Clients.id, Clients.prenom, Clients.nom, Clients.email, Clients.telephone, Clients.ville, Clients.zipcode, Clients.adresse, Clients.description, Clients.created_at, Clients.author_id,
+    Users.email AS user_email
+    FROM Clients
+    INNER JOIN Users ON Clients.author_id = Users.id;
+      `;
+
+    try {
+      const [result] = await db.execute(sql);
+      return result;
     } catch (error) {
       throw error
     }
