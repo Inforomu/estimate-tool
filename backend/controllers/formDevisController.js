@@ -2,7 +2,8 @@ const FormData = require('../models/formDevis');
 
 exports.submitForm = async (req, res) => {
     try {
-        console.log('Données reçues du formulaire :', req.body);
+        const userId = req.userID;
+        console.log('Données reçues du formulaire :', req.body, req.userID);
         const formData = new FormData({
             power_contract: req.body.power_contract,
             power_yg: req.body.power_yg,
@@ -20,10 +21,11 @@ exports.submitForm = async (req, res) => {
             dispo_td: req.body.dispo_td,
             power_charging: req.body.power_charging,
             charge_points: req.body.charge_points,
-            box_nb: req.body.box_nb
+            box_nb: req.body.box_nb,
+            author_id: req.userID
 
         });
-        const formDataResult = await formData.save();
+        const formDataResult = await formData.save(formData, userId);
         const formDataId = formDataResult.insertId;
         console.log(formDataId);
         console.log('Save formulaire ok');

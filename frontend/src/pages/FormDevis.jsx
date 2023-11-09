@@ -1,5 +1,5 @@
+import Cookies from 'js-cookie';
 import {React, useState} from 'react';
-
 
 export default function FormDevis() {
 
@@ -42,16 +42,23 @@ export default function FormDevis() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
+        // console.log(apiUrl)
+
+
 
         if (power_contract !== '') {
             const dataFormData = { power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging, charge_points, box_nb};
             console.log(dataFormData);
+            
 
             try {
-                const dataResponse = await fetch('http://localhost:3000/api/uploadformdevis/uploadformdevis', {
+                const token = Cookies.get('token');
+                const dataResponse = await fetch(`${apiUrl}/api/uploadformdevis/uploadformdevis`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
                     },
                     body: JSON.stringify(dataFormData),
                 });
@@ -65,20 +72,15 @@ export default function FormDevis() {
                         imageformData.append('image', pictures[i]);
                     }
                     imageformData.append('formDataId', formDataId);
+                    const imageResponse = await fetch(`${apiUrl}/api/uploadimg/uploadimg`, {
+                        method: 'POST',
+                        body: imageformData,
+                    });
 
-                    try {
-                        const imageResponse = await fetch('http://localhost:3000/api/uploadimg/uploadimg', {
-                            method: 'POST',
-                            body: imageformData,
-                        });
-
-                        if (imageResponse.ok) {
-                            console.log('Upload img ok');
-                        } else {
-                            console.error('Problème lors du téléchargement de l\'image');
-                        }
-                    } catch (error) {
-                        console.error('Requête error:', error);
+                    if (imageResponse.ok) {
+                        console.log('Upload img ok');
+                    } else {
+                        console.error('Problème lors du téléchargement de l\'image');
                     }
                     console.log('Upload data ok');
                 } else {
@@ -120,7 +122,7 @@ export default function FormDevis() {
                             placeholder='' 
                             onChange={(e) => setPowerYg(e.target.value)}
                             />
-                            <label for="power_yg" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Puissance souscrite (tarif jaune ou vert)
+                            <label htmlFor="power_yg" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Puissance souscrite (tarif jaune ou vert)
                             </label>
                     </div>
                     <select
@@ -177,12 +179,11 @@ export default function FormDevis() {
                         <input 
                             type="text" 
                             className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-green-700 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer' 
-                            value={ground_res} 
- 
+                            value={ground_res}
                             placeholder='' 
                             onChange={(e) => setGround_res(e.target.value)}
                         />
-                        <label for="ground_res" class="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Valeur de resistance de terre
+                        <label htmlFor="ground_res" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Valeur de resistance de terre
                         </label>
                     </div>
                     <select
@@ -201,13 +202,12 @@ export default function FormDevis() {
                     <div className='relative z-0 w-full mb-6 mt-6 group'>
                         <input 
                             type="text"
-                            className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-green-700 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer' 
-                            value={breaker}  
- 
+                            className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-green-700 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer'
+                            value={breaker}
                             placeholder='' 
                             onChange={(e) => setBreaker(e.target.value)}
                         />
-                        <label for="breaker" class="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Calibre disjoncteur general
+                        <label htmlFor="breaker" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Calibre disjoncteur general
                         </label>
                     </div>
 
@@ -215,12 +215,11 @@ export default function FormDevis() {
                         <input 
                             type="text"
                             className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-green-700 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer'
-                            value={distance} 
- 
+                            value={distance}
                             placeholder='' 
                             onChange={(e) => setDistance(e.target.value)}
                         />
-                        <label for="distance" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Distance entre le TD et la ou les borne(s)
+                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Distance entre le TD et la ou les borne(s)
                         </label>
                     </div>
 
@@ -265,36 +264,33 @@ export default function FormDevis() {
                         <input 
                             type="text"
                             className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-green-700 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer' 
-                            value={power_charging} 
- 
+                            value={power_charging}
                             placeholder='' 
                             onChange={(e) => setPower_charging(e.target.value)}
                         />
-                        <label for="distance" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Puissance de charge souhaiter
+                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Puissance de charge souhaiter
                         </label>
                     </div>
                     <div className='relative z-0 w-full mb-6 mt-6 group'>
                         <input 
                             type="text"
                             className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-green-700 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer' 
-                            value={charge_points} 
- 
+                            value={charge_points}
                             placeholder='' 
                             onChange={(e) => setCharge_points(e.target.value)}
                         />
-                        <label for="distance" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de points de recharges souhaiter
+                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de points de recharges souhaiter
                         </label>
                     </div>
                     <div className='relative z-0 w-full mb-6 mt-6 group'>
                         <input 
                             type="text"
                             className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-green-700 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer' 
-                            value={box_nb} 
- 
+                            value={box_nb}
                             placeholder='' 
                             onChange={(e) => setBox_nb(e.target.value)}
                         />
-                        <label for="distance" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de bornes de recharges souhaiter
+                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-800 dark:text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de bornes de recharges souhaiter
                         </label>
                     </div>
                     <input name="image" id="image" type="file" accept="image/*" capture="user" multiple onChange={handleFileSave} />

@@ -15,7 +15,7 @@ class Client {
   async save() {
 
     let sql = `
-        INSERT INTO Client(
+        INSERT INTO Clients(
             prenom,
             nom,
             email,
