@@ -26,9 +26,11 @@ function Signup() {
         e.preventDefault();
 
         const userData = { email, password };
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 
         try {
-            const response = await fetch("http://localhost:3000/api/auth/signup", {
+            const response = await fetch(`${apiUrl}/api/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

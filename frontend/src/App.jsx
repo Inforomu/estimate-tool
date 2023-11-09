@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import NotFoundPage from './pages/NotFoundPage';
 import FormDevis from "./pages/FormDevis";
 import FormClient from './pages/FormClient';
+import Client from './pages/Client';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route path="/signup" element={<Navigate to="/" />} />
             <Route path="/formdevis" element={<FormDevis />} />
             <Route path="/formclient" element={<FormClient />} />
+            <Route path="/clients" element={<Client />} />
           </>
         ) : (
           <>

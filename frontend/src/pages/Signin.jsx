@@ -30,9 +30,10 @@ function Signin() {
         e.preventDefault();
 
         const userData = { email, password };
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
         try {
-            const loginResponse = await fetch("http://localhost:3000/api/auth/login", {
+            const loginResponse = await fetch(`${apiUrl}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
