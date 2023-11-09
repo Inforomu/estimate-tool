@@ -26,9 +26,9 @@ class DevisData {
         const sql = `
         INSERT INTO Devis (
             power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging,
-            charge_points, box_nb
+            charge_points, box_nb, author_id
         )
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         const values = [
@@ -48,7 +48,8 @@ class DevisData {
             this.dispo_td,
             this.power_charging,
             this.charge_points,
-            this.box_nb
+            this.box_nb,
+            this.author_id
         ];
 
         try {
