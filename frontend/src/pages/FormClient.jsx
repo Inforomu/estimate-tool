@@ -12,6 +12,7 @@ export default function FormClient() {
     const [city, setCity] = useState('');
     const [zip_code, setZip_code] = useState('');
     const [adresse, setAdresse] = useState('');
+    const [description, setDescription] = useState('');
     const [error, setError] = useState(null);
 
     const navigate = useNavigate();
@@ -44,16 +45,19 @@ export default function FormClient() {
         setAdresse(e.target.value);
     }
 
-
+    const handleDescriptionChange = (e) => {
+        setDescription(e.target.value);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formClientData = { prenom, nom, email, phone, city, zip_code, adresse };
+        const formClientData = { prenom, nom, email, phone, city, zip_code, adresse, description };
         const token = Cookies.get('token');
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
         try {
-            const ClientResponse = await fetch("http://localhost:3000/api/client", {
+            const ClientResponse = await fetch(`${apiUrl}/api/client`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +83,7 @@ export default function FormClient() {
     };
 
     return (
-        <section className=' w-80'>
+        <section className=' w-full flex flex-col justify-center items-center'>
             <h2 className=' text-2xl font-semibold py-5'>Créer un Client</h2>
             {error && (
                 <div className="bg-red-300 text-sm font-semibold p-1 my-1 rounded shadow" role="alert">
@@ -173,7 +177,7 @@ export default function FormClient() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-2">
+                <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
                             Adresse
@@ -188,7 +192,19 @@ export default function FormClient() {
                         />
                     </div>
                 </div>
-                <button type="submit" className='bg-green-500 mt-3 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Créer un client</button>
+                <div className='flex flex-wrap mb-6'>
+                    <label htmlFor="description" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Ajouter une Desciption</label>
+                    <textarea id="description" 
+                        rows="4" 
+                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                        placeholder="Ajouté si nécessaire ..."
+                        maxLength={500}
+                        value={description}
+                        onChange={handleDescriptionChange}
+                        >
+                    </textarea>
+                </div>
+                <button type="submit" className='bg-green-500 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Créer un client</button>
             </form>
         </section>
     )
