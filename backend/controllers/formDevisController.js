@@ -36,3 +36,14 @@ exports.submitForm = async (req, res) => {
         res.status(500).json({ error: 'Erreur save formulaire' });
     }
 };
+
+exports.getAllFormData = async (req, res) => {
+    try {
+        FormData.find()
+            .then(data => res.status(200).json(data))
+            .catch(error => res.status(400).json({ error }));
+    } catch (error) {
+        console.log(error);
+        return res.status(404).json({ message: 'Objet non Trouver' })
+    }
+}
