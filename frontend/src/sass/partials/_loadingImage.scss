@@ -1,0 +1,17 @@
+.loading-image {
+    animation: loadingImage 2s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7rem;
+}
+
+@keyframes loadingImage {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
