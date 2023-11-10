@@ -10,6 +10,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import FormDevis from "./pages/FormDevis";
 import FormClient from './pages/FormClient';
 import Client from './pages/Client';
+import ShowDevis from './pages/showDevis';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
             <Route path="/formdevis" element={<FormDevis />} />
             <Route path="/formclient" element={<FormClient />} />
             <Route path="/clients" element={<Client />} />
+            <Route path="/devis" element={<ShowDevis />} />
           </>
         ) : (
           <>

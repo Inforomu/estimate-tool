@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import CardDevis from '../components/cardDevis';
 
 export default function Client() {
 
-    const [clients, setClients] = useState([]);
+    const [devis, setDevis] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -18,7 +19,7 @@ export default function Client() {
             },
         };
 
-        fetch(`${apiUrl}/api/client`, requestOptions)
+        fetch(`${apiUrl}/api/uploadformdevis`, requestOptions)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("La requête a échoué");
@@ -27,19 +28,19 @@ export default function Client() {
             })
             .then((data) => {
                 console.log(data);
-                setClients(data);
+                setDevis(data);
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Erreur lors de la récupération des clients :", error);
-                setError('Erreur lors de la récupération des clients :');
+                console.error("Erreur lors de la récupération des devis :", error);
+                setError('Erreur lors de la récupération des devis :');
                 setLoading(false);
             });
     }, []);
 
     return (
         <section>
-            <h2 className=' text-2xl font-semibold py-5'>Liste des Clients</h2>
+            <h2 className=' text-2xl font-semibold py-5'>Liste des Devis</h2>
             <>
                 {loading ? (
                     <div className="text-center mt-5">
@@ -53,8 +54,8 @@ export default function Client() {
                     ) : (
                         <>
                             <div>
-                                {clients.map((clients) => (
-                                    <h2>{clients.id}</h2>
+                                {devis.map((devis) => (
+                                    <CardDevis key={devis.id} devis={devis} />
                                 ))}
                             </div>
                         </>

@@ -54,7 +54,7 @@ export default function FormDevis() {
 
             try {
                 const token = Cookies.get('token');
-                const dataResponse = await fetch(`${apiUrl}/api/uploadformdevis/uploadformdevis`, {
+                const dataResponse = await fetch(`${apiUrl}/api/uploadformdevis`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
