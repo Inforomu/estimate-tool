@@ -62,7 +62,7 @@ class DevisData {
 
     static async find() {
         let sql = `
-        SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e,
+        SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb,
         Users.email AS user_email
         FROM Devis
         INNER JOIN Users ON Devis.author_id = Users.id;
