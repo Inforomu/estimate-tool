@@ -49,13 +49,7 @@ export default function Client() {
     }
 
     return (
-        <section className='flex flex-col'>
-            <div className='link-back w-20 m-10'>
-                <Link to='/'>
-                    <img src={backArrow} alt="" />
-                </Link>
-            </div>
-            <h2 className='text-4xl text-center font-semibold'>Liste des Devis</h2>
+        <section className='flex flex-col w-full'>
             <>
                 {loading ? (
                     <div className="loading-image text-center">
@@ -68,7 +62,13 @@ export default function Client() {
                         </div>
                     ) : (
                         <>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+                            <div className='link-back w-20 ml-24 mt-10'>
+                                <Link to='/'>
+                                    <img src={backArrow} alt="" />
+                                </Link>
+                            </div>
+                            <h2 className='text-2xl font-semibold py-2 text-center underline'>Liste des Devis</h2>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 m-20'>
                                 {devis.map((devis) => (
                                     <CardDevis key={devis.id} devis={devis} onDelete={handleDelete}/>
                                 ))}

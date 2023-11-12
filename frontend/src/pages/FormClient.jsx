@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
+import backArrow from '../assets/backArrow.png'
 
 
 export default function FormClient() {
@@ -90,14 +91,14 @@ export default function FormClient() {
                     {error}
                 </div>
             )}
-            <form onSubmit={handleSubmit} className="w-full max-w-lg bg-opacity-25 bg-purple-500 p-5 rounded-md shadow">
+            <form onSubmit={handleSubmit} className="w-full max-w-lg bg-opacity-25 bg-green-600 p-5 rounded-md shadow">
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+                        <label className="block uppercase tracking-wide text-green-900 outline-none text-xs font-bold mb-2" htmlFor="grid-first-name">
                             Prenom
                         </label>
                         <input
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-white text-green-900 text-md rounded-lg block w-full p-2.5"
                             id="grid-first-name"
                             type="text"
                             placeholder="Prénom"

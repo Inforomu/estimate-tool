@@ -1,13 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-export default function CardDevis({ devis, onDelete }) {
+export default function cardDevisDetail({ devis }) {
 
-    const handleDeleteDevis = () => {
-        const confirmDelete = window.confirm('Voulez-vous supprimer ce devis ?');
-        if (confirmDelete) {
-            onDelete(devis.id);
-        }
-    }
+    // const handleDeleteDevis = () => {
+    //     const confirmDelete = window.confirm('Voulez-vous supprimer ce devis ?');
+    //     if (confirmDelete) {
+    //       onDelete(devis.id);
+    //     };
+    // }
+    // Ajouter delete ici et pas dans le cardDevis avec logique back pour les admins.
 
     return (
         <div className="bg-white w-full h-full rounded-lg shadow-lg p-4 m-2">
@@ -28,14 +29,7 @@ export default function CardDevis({ devis, onDelete }) {
             <p><span className='font-bold'>Puissance de charge souhaiter:</span> {devis.power_charging}</p>
             <p><span className='font-bold'>Nombres de points de charges:</span> {devis.charge_points}</p>
             <p><span className='font-bold'>Nombres de bornes:</span> {devis.box_nb}</p>
-            <p><span className='font-bold'>Relever terrain effectuer par:</span> {devis.author_id}</p>
-            <button 
-                type="button"
-                className="delete-button bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 px-4 py-2 rounded transition-all duration-300" 
-                onClick={handleDeleteDevis}>
-                Supprimer
-            </button>
+            <p><span className='font-bold'>Relever terrain effectuer par:</span> {devis.user_email}</p>
         </div>
     );
 }
-
