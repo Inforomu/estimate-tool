@@ -34,6 +34,19 @@ class User {
             throw error;
         }
     }
+
+    static async findById(id) {
+        const sql = `
+            SELECT * FROM Users WHERE id = ?
+        `;
+    
+        try {
+            const result = await db.execute(sql, [id]);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = User;
