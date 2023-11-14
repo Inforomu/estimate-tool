@@ -20,6 +20,7 @@ class DevisData {
         this.charge_points = data.charge_points;
         this.box_nb = data.box_nb;
         this.author_id = data.author_id;
+        this.id = data.id;
     }
 
     async save() {
@@ -55,7 +56,7 @@ class DevisData {
         try {
             const [result] = await db.execute(sql, values);
             return { insertId: result.insertId };
-        } catch(error) {
+        } catch (error) {
             throw error;
         }
     }
@@ -63,17 +64,37 @@ class DevisData {
     static async find() {
         let sql = `
         SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb,
-        Users.email AS user_email
+        Users.email AS user_email,
+        Devis_Image.id AS devis_image_id
         FROM Devis
-        INNER JOIN Users ON Devis.author_id = Users.id;
+        INNER JOIN Users ON Devis.author_id = Users.id
+        LEFT JOIN Devis_Image ON Devis.id = Devis_Image.devis_id;
         `;
         try {
-          const [result] = await db.execute(sql);
-          return result;
+            const [result] = await db.execute(sql);
+            return result;
         } catch (error) {
-          throw error
+            throw error;
         }
-      }
+    }
+
+    async linkImageId(imageId) {
+        const linkSql = `
+        INSERT INTO Devis_Image (
+            devis_id, image_id
+        )
+        VALUES (?, ?)
+        `;
+
+        const updateValues = [this.id, imageId];
+
+        try {
+            const [result] = await db.execute(linkSql, updateValues);
+            return { insertId: result.insertId };
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = DevisData;
