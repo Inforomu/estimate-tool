@@ -11,6 +11,7 @@ import FormDevis from "./pages/FormDevis";
 import FormClient from './pages/FormClient';
 import ShowClient from './pages/showClient';
 import ShowDevis from './pages/showDevis';
+import ShowImage from './pages/showImg';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             <Route path="/formclient" element={<FormClient />} />
             <Route path="/clients" element={<ShowClient />} />
             <Route path="/devis" element={<ShowDevis />} />
+            <Route path="/image" element={<ShowImage />} />
           </>
         ) : (
           <>

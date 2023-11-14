@@ -1,22 +1,20 @@
 const db = require('../config/db');
 
 class Image {
-    constructor(image_data, devis_id) {
+    constructor(image_data) {
         this.image_data = image_data;
-        this.devis_id = devis_id;
     }
 
     async save() {
         const sql = `
         INSERT INTO Image(
-            image_data, devis_id
+            image_data
         )
-        VALUES (?, ?)
+        VALUES (?)
     `;
 
     const values = [
-        this.image_data,
-        this.devis_id
+        this.image_data
     ]
 
     try {
@@ -28,8 +26,31 @@ class Image {
     }
 
     static getAllImages() {
-        const sql = 'SELECT * FROM image';
+        const sqlImgData = 'SELECT Image.image_data FROM Image';
+        return db.query(sqlImgData);
+    }
+
+    static getAllImagesData() {
+        const sql = 'SELECT * FROM Image';
         return db.query(sql);
+    }
+
+    async linkToDevis(devisId) {
+        const linkSql = `
+        INSERT INTO Devis_Image (
+            devis_id, image_id
+        )
+        VALUES (?, ?)
+    `;
+
+        const values = [devisId, this.insertId];
+
+        try {
+            await db.execute(linkSql, values);
+        } catch (error) {
+            console.error('link Image to Devis plante', error);
+            throw error;
+        }
     }
 
 }
