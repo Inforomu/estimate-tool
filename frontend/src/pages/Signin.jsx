@@ -65,21 +65,26 @@ function Signin() {
     };
 
     return (
-        <section className=' w-80'>
-            <h2 className=' text-2xl font-semibold'>Connexion</h2>
+        <section className='w-full h-screen ml-10 mr-10 sm:ml-20 sm:mr-20 md:ml-36 md:mr-36 lg:ml-96 lg:mr-96'>
+            <div>
+                <h2 className='title-signin text-4xl bg-white w-full py-5 shadow-2xl rounded-lg text-center font-semibold mt-20'>Bienvenue sur estimate tool !</h2>
+            </div>
+            <div>
+                <h2 className=' text-2xl text-center font-semibold mt-20'>Connectez-vous ici !</h2>
+            </div>
             {error && (
                 <div className="bg-red-300 text-sm font-semibold p-1 my-1 rounded shadow" role="alert">
                     {error}
                 </div>
             )}
-            <form onSubmit={handleSubmit} className='bg-opacity-25 bg-purple-500 p-5 rounded-md shadow'>
+            <form onSubmit={handleSubmit} className='bg-opacity-25 bg-white p-5 rounded-md shadow-2xl'>
                 <div className="mb-6">
-                    <label htmlFor="email" className="block mb-2 text-md font-medium text-gray-900 dark:text-white">Email :</label>
+                    <label htmlFor="email" className="block mb-2 text-md font-medium text-green-500 underline">Email :</label>
                     <input
                         type="email"
                         id="email"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Votre Email"
+                        className="text-gray-900 text-md rounded-lg block w-full p-2.5 shadow-2xl bg-white focus:outline-none"
+                        placeholder="Ex: exemple@inforomu.com"
                         name="email"
                         minLength={3}
                         maxLength={40}
@@ -90,11 +95,11 @@ function Signin() {
                     />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="password" className="block mb-2 text-md font-medium text-gray-900 dark:text-white">Mot de Passe :</label>
+                    <label htmlFor="password" className="block mb-2 text-md font-medium text-green-500 underline">Mot de Passe :</label>
                     <input
                         type="password"
                         id="password"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="text-gray-900 text-md rounded-lg block w-full p-2.5 shadow-2xl bg-white"
                         placeholder="********"
                         name="password"
                         minLength={3}
@@ -105,12 +110,14 @@ function Signin() {
                         required
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                >
+                <div className='flex w-full justify-center'>
+                    <button
+                        type="submit"
+                        className="text-green-500 bg-white hover:bg-green-600 hover:text-white focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto shadow-2xl px-5 py-2.5 text-center transition-all duration-300"
+                    >
                     Connexion
-                </button>
+                    </button>
+                </div>
             </form>
         </section>
     );

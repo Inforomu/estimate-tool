@@ -4,6 +4,13 @@
 
 @import './partials/formDevis';
 @import './partials/loadingImage';
+@import './partials/signIn';
+
+@font-face {
+    font-family: 'Varela';
+    src: url(fonts/VarelaRound-Regular.ttf);
+}
+
 
 * {
     margin: 0;
