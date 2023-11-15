@@ -116,11 +116,6 @@ export default function FormDevis() {
     // Voir mettre back arrow dans l'app et mettre une maison a la place d'une fleche
     return (
         <div className='w-full m-4'>
-            <div className='link-back w-20 mt-4 ml-20'>
-                <Link to='/'>
-                    <img src={backArrow} alt="" />
-                </Link>
-            </div>
             <h2 className='w-full text-center text-3xl font-bold underline py-2'>Relever terrain :</h2>
             <form className='test sm:mx-8 md:mx-16 lg:mx-48 bg-white shadow-xl p-6 rounded-xl' encType="multipart/form-data" onSubmit={handleSubmit}>
                 <div className="input-data">

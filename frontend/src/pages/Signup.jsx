@@ -59,7 +59,7 @@ function Signup() {
         <section className=''>
             <h2 className=' text-2xl font-semibold'>Inscription</h2>
             {error && (
-                <div className="bg-red-300 text-sm font-semibold p-1 my-1 rounded shadow" role="alert">
+                <div className="bg-white text-sm font-semibold p-1 my-1 rounded shadow" role="alert">
                     {error}
                 </div>
             )}
