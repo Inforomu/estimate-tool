@@ -25,3 +25,38 @@ exports.getAllClient = async (req, res, next) => {
         return res.status(404).json({ message: 'Client non récupérer' })
     }
 }
+
+
+exports.getOneClient = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+
+        Client.findOne(id)
+            .then((client) => {
+                if (client && client[0] && client[0].length > 0) {
+                    res.status(200).json(client[0]);
+                } else {
+                    res.status(404).json({ message: 'Client non trouvé' });
+                }
+            })
+            .catch((error) => {
+                console.error("Error when retrieving the item:", error);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
+
+exports.modifyClient = async (req, res, next) => {
+    try {
+        const { id, prenom, nom, email, telephone, ville, zipcode, adresse, description } = req.body;
+        await Client.updateOne(id, prenom, nom, email, telephone, ville, zipcode, adresse, description)
+            .then(() => res.status(200).json({ message: 'Client modifié !' }))
+            .catch(error => res.status(400).json({ error }));
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}

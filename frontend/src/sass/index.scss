@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './partials/formDevis';
 @import './partials/loadingImage';
 
 * {
@@ -22,13 +21,23 @@
 body {
     background-color: #f7f7f7;
     opacity: 1;
-    background-image: radial-gradient( #ffffff);
     background-size: 11px 11px;
     min-height: 100vh;
     main {
-        min-height: 80vh;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 70px 0;
     }
+}
+
+.navlogo {
+    transition: transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+}
+
+.navlogo:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(2px 6px rgba(0, 0, 0, 0.2));
 }

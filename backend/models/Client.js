@@ -52,7 +52,7 @@ class Client {
 
   static async find() {
     let sql = `
-    SELECT Clients.id, Clients.prenom, Clients.nom, Clients.email, Clients.telephone, Clients.ville, Clients.zipcode, Clients.adresse, Clients.description, Clients.created_at, Clients.author_id,
+    SELECT Clients.id, Clients.prenom, Clients.nom, Clients.email, Clients.telephone, Clients.ville, Clients.zipcode, Clients.adresse, Clients.description, Clients.created_at, Clients.author_id, Clients.adresse,
     Users.email AS user_email
     FROM Clients
     INNER JOIN Users ON Clients.author_id = Users.id;
@@ -63,6 +63,47 @@ class Client {
       return result;
     } catch (error) {
       throw error
+    }
+  }
+
+  static async findOne(id) {
+    let sql = `
+    SELECT Clients.id, Clients.prenom, Clients.nom, Clients.email, Clients.telephone, Clients.ville, Clients.zipcode, Clients.adresse, Clients.description, Clients.created_at, Clients.author_id, Clients.adresse,
+    Users.email AS user_email
+    FROM Clients
+    INNER JOIN Users ON Clients.author_id = Users.id
+    WHERE Clients.id = ?;
+      `;
+
+    try {
+      const result = await db.execute(sql, [id]);
+      return result;
+    } catch (error) {
+      throw error
+    }
+  }
+
+  static async updateOne( id, prenom, nom, email, telephone, ville, zipcode, adresse, description ) {
+    let sql = `
+        UPDATE Clients
+        SET prenom = ?,
+          nom = ?,
+          email = ?,
+          telephone = ?,
+          adresse = ?,
+          zipcode = ?,
+          ville = ?,
+          description = ?
+        WHERE id = ?;
+      `;
+
+    const values = [  prenom, nom, email, telephone,adresse, zipcode, ville, description, id ];
+
+    try {
+      const result = await db.execute(sql, values);
+      return result;
+    } catch (error) {
+      throw error;
     }
   }
 

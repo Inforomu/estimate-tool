@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import CardClient from '../components/cardClient';
-import backArrow from '../assets/backArrow.png';
+import CardClient from '../components/CardClient';
 import loadingImage from '../assets/loading.png'
 import { Link } from 'react-router-dom';
 
@@ -49,7 +48,7 @@ export default function showClient() {
     // }
 
     return (
-        <section className='flex flex-col w-full'>
+        <section className='flex flex-col w-full py-5'>
             <>
                 {loading ? (
                     <div className="loading-image text-center">
@@ -62,15 +61,10 @@ export default function showClient() {
                         </div>
                     ) : (
                         <>
-                            <div className='link-back w-20 ml-24 mt-10 fixed top-0'>
-                                <Link to='/'>
-                                    <img src={backArrow} alt="" />
-                                </Link>
-                            </div>
                             <div className='mt-2 text-2xl font-semibold text-center underline'>
                             <h2>Liste des Clients</h2>
                             </div>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 m-20'>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 m-2 sm:m-5 md:m-10'>
                                 {clients.map((clients) => (
                                     <CardClient key={clients.id} clients={clients}/>
                                 ))}

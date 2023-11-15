@@ -9,9 +9,11 @@ import Home from './pages/Home';
 import NotFoundPage from './pages/NotFoundPage';
 import FormDevis from "./pages/FormDevis";
 import FormClient from './pages/FormClient';
-import ShowClient from './pages/showClient';
+import Client from './pages/Client';
 import ShowDevis from './pages/showDevis';
 import ShowImage from './pages/showImg';
+import ShowClient from './pages/ShowClient';
+import NavLogo from './components/NavLogo';
 
 
 function App() {
@@ -37,15 +39,19 @@ function App() {
 
   return (
     <BrowserRouter>
+    <header>
+      <NavLogo />
+    </header>
     <main>
       <Routes>
         {user.isLogged ? (
           <>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Navigate to="/" />} />
-            <Route path="/formdevis" element={<FormDevis />} />
+            <Route path="/formdevis/:id" element={<FormDevis />} />
             <Route path="/formclient" element={<FormClient />} />
-            <Route path="/clients" element={<ShowClient />} />
+            <Route path="/clients" element={<Client />} />
+            <Route path="/clients/:id" element={<ShowClient />} />
             <Route path="/devis" element={<ShowDevis />} />
             <Route path="/image" element={<ShowImage />} />
           </>
