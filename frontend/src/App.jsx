@@ -10,6 +10,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import FormDevis from "./pages/FormDevis";
 import FormClient from './pages/FormClient';
 import Client from './pages/Client';
+import Devis from './pages/Devis';
 import ShowDevis from './pages/showDevis';
 import ShowImage from './pages/showImg';
 import ShowClient from './pages/ShowClient';
@@ -52,7 +53,8 @@ function App() {
             <Route path="/formclient" element={<FormClient />} />
             <Route path="/clients" element={<Client />} />
             <Route path="/clients/:id" element={<ShowClient />} />
-            <Route path="/devis" element={<ShowDevis />} />
+            <Route path="/devis" element={<Devis />} />
+            <Route path="/devis/:id" element={<ShowDevis />} />
             <Route path="/image" element={<ShowImage />} />
           </>
         ) : (

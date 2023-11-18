@@ -1,82 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
+import CardDevisDetail from '../components/cardDevisDetail'
 import Cookies from 'js-cookie';
-import CardDevis from '../components/cardDevis';
-import { Link } from 'react-router-dom';
-import backArrow from '../assets/backArrow.png'
-import loadingImage from '../assets/loading.png'
+import { useParams } from 'react-router-dom';
 
-export default function Client() {
+export default function showDevis() {
 
     const [devis, setDevis] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-
+    const  {id}  = useParams();
+    const [shouldFetchData, setShouldFetchData] = useState(false);
 
     useEffect(() => {
-        const apiUrl = import.meta.env.VITE_API_BASE_URL;
-        const token = Cookies.get('token');
-        const requestOptions = {
-            headers: {
+        const fetchData = async () => {
+          try {
+            const token = Cookies.get('token');
+            const requestOptions = {
+              headers: {
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
-            },
+              },
+            };
+    
+            const response = await fetch(`http://localhost:3000/api/uploadformdevis/${id}`, requestOptions);
+            if (!response.ok) {
+              throw new Error("La requête a échoué");
+            }
+    
+            const data = await response.json();
+            console.log(data);
+            setDevis(data[0]);
+            setShouldFetchData(false);
+          } catch (error) {
+            console.error("Erreur lors de la récupération du client :", error);
+          }
         };
+    
+        fetchData();
+    
+      }, [shouldFetchData, id]);
+    
 
-        fetch(`${apiUrl}/api/uploadformdevis`, requestOptions)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("La requête a échoué");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data);
-                setDevis(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération des devis :", error);
-                setError('Erreur lors de la récupération des devis :');
-                setLoading(false);
-            });
-    }, []);
-
-    const handleDelete = (id) => {
-
-        const deleteDevis = devis.filter(devisIndex => devisIndex.id !== id);
-        setDevis(deleteDevis);
-        console.log('Suppression du devis:', id);
-    }
-
-    return (
-        <section className='flex flex-col w-full'>
-            <>
-                {loading ? (
-                    <div className="loading-image text-center">
-                        <img src={loadingImage} alt="" />
-                    </div>
-                ) : (
-                    error ? (
-                        <div className="bg-red-300 text-sm font-semibold p-1 my-1 rounded shadow" role="alert">
-                            {error}
-                        </div>
-                    ) : (
-                        <>
-                            <div className='link-back w-20 ml-24 mt-10'>
-                                <Link to='/'>
-                                    <img src={backArrow} alt="" />
-                                </Link>
-                            </div>
-                            <h2 className='text-2xl font-semibold py-2 text-center underline'>Liste des Devis</h2>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 m-20'>
-                                {devis.map((devis) => (
-                                    <CardDevis key={devis.id} devis={devis} onDelete={handleDelete}/>
-                                ))}
-                            </div>
-                        </>
-                    )
-                )}
-            </>
-        </section>
-    )
+  return (
+    <div>
+        <div className="bg-white border border-gray-200 rounded-lg ">
+            <div className="p-5">
+              <CardDevisDetail devis={devis} />
+            </div>
+        </div>
+    </div>
+  )
 }

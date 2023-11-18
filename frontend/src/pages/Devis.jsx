@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import CardClient from '../components/CardClient';
-import loadingImage from '../assets/loading.png'
+import CardDevis from '../components/cardDevis';
 import { Link } from 'react-router-dom';
+import backArrow from '../assets/backArrow.png'
+import loadingImage from '../assets/loading.png'
 
-export default function showClient() {
+export default function Devis() {
 
-    const [clients, setClients] = useState([]);
+    const [devis, setDevis] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -21,7 +22,7 @@ export default function showClient() {
             },
         };
 
-        fetch(`${apiUrl}/api/client`, requestOptions)
+        fetch(`${apiUrl}/api/uploadformdevis`, requestOptions)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("La requête a échoué");
@@ -30,25 +31,25 @@ export default function showClient() {
             })
             .then((data) => {
                 console.log(data);
-                setClients(data);
+                setDevis(data);
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Erreur lors de la récupération des clients :", error);
-                setError('Erreur lors de la récupération des clients :');
+                console.error("Erreur lors de la récupération des devis :", error);
+                setError('Erreur lors de la récupération des devis :');
                 setLoading(false);
             });
     }, []);
 
-    // const handleDelete = (id) => {
+    const handleDelete = (id) => {
 
-    //     const deleteClients = clients.filter(clientsIndex => clientsIndex.id !== id);
-    //     setClients(deleteClients);
-    //     console.log('Suppression du client:', id);
-    // }
+        const deleteDevis = devis.filter(devisIndex => devisIndex.id !== id);
+        setDevis(deleteDevis);
+        console.log('Suppression du devis:', id);
+    }
 
     return (
-        <section className='flex flex-col w-full py-5'>
+        <section className='flex flex-col w-full'>
             <>
                 {loading ? (
                     <div className="text-center w-full flex justify-center">
@@ -61,12 +62,10 @@ export default function showClient() {
                         </div>
                     ) : (
                         <>
-                            <div className='mt-2 text-2xl font-semibold text-center underline'>
-                            <h2>Liste des Clients</h2>
-                            </div>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 m-2 sm:m-5 md:m-10'>
-                                {clients.map((clients) => (
-                                    <CardClient key={clients.id} clients={clients}/>
+                            <h2 className='text-2xl font-semibold py-2 text-center underline'>Liste des Devis</h2>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 m-20'>
+                                {devis.map((devis) => (
+                                    <CardDevis key={devis.id} devis={devis} onDelete={handleDelete}/>
                                 ))}
                             </div>
                         </>

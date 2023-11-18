@@ -118,8 +118,8 @@ export default function showClient() {
     <section className='flex md:flex-row py-5 flex-col justify-center items-center h-full w-full'>
       <>
         {loading ? (
-          <div className="loading-image text-center">
-            <img src={loadingImage} alt="" />
+          <div className="text-center w-full flex justify-center">
+            <img src={loadingImage} className='loading-image text-center' alt="" />
           </div>
         ) : (
           error ? (

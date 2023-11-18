@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function cardDevisDetail({ devis }) {
 
@@ -11,25 +12,67 @@ export default function cardDevisDetail({ devis }) {
     // Ajouter delete ici et pas dans le cardDevis avec logique back pour les admins.
 
     return (
-        <div className="bg-white w-full h-full rounded-lg shadow-lg p-4 m-2">
-            <p><span className='font-bold'>Puissance souscrite:</span> {devis.power_contract}</p>
-            <p><span className='font-bold'>Puissance souscrite (tarif jaune ou vert):</span> {devis.power_yg}</p>
-            <p><span className='font-bold'>Contrat:</span> {devis.contract}</p>
-            <p><span className='font-bold'>Compteur electronique:</span> {devis.electric_controller}</p>
-            <p><span className='font-bold'>Connexion telereport:</span> {devis.telereport}</p>
-            <p><span className='font-bold'>Couverture Wifi:</span> {devis.wifi}</p>
-            <p><span className='font-bold'>Couverture Mobile:</span> {devis.mobile}</p>
-            <p><span className='font-bold'>Systeme de resistance a la terre:</span> {devis.ground_res}</p>
-            <p><span className='font-bold'>Systeme de neutre:</span> {devis.neutral_system}</p>
-            <p><span className='font-bold'>Calibre disjoncteur generale:</span> {devis.breaker}</p>
-            <p><span className='font-bold'>Distance entre le TD et la ou les bornes:</span> {devis.distance}</p>
-            <p><span className='font-bold'>Type de securite de charge:</span> {devis.secure}</p>
-            <p><span className='font-bold'>Besoin d'une prise type E:</span> {devis.type_e}</p>
-            <p><span className='font-bold'>Disponibilite TD:</span> {devis.dispo_td}</p>
-            <p><span className='font-bold'>Puissance de charge souhaiter:</span> {devis.power_charging}</p>
-            <p><span className='font-bold'>Nombres de points de charges:</span> {devis.charge_points}</p>
-            <p><span className='font-bold'>Nombres de bornes:</span> {devis.box_nb}</p>
-            <p><span className='font-bold'>Relever terrain effectuer par:</span> {devis.user_email}</p>
+        <div className='w-full h-full'>
+            <div>
+                <h2 className='paragraph-card-devis text-center text-xl text-green-500'>Details du relever terrain :</h2>
+            </div>
+                <div className='w-full p-6 paragraph-card-devis'>
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Puissance souscrite:</span> <span className='ml-1 text-green-500 font-bold'>{devis.power_contract}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Puissance souscrite (tarif jaune ou vert):</span> <span className='ml-1 text-green-500 font-bold'>{devis.power_yg}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Contrat:</span> <span className='ml-1 text-green-500 font-bold'>{devis.contract}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Compteur electronique:</span> <span className='ml-1 text-green-500 font-bold'>{devis.electric_controller}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Connexion telereport:</span> <span className='ml-1 text-green-500 font-bold'>{devis.telereport}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Couverture Wifi:</span> <span className='ml-1 text-green-500 font-bold'>{devis.wifi}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Couverture Mobile:</span> <span className='ml-1 text-green-500 font-bold'>{devis.mobile}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Systeme de resistance a la terre:</span> <span className='ml-1 text-green-500 font-bold'>{devis.ground_res}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Systeme de neutre:</span> <span className='ml-1 text-green-500 font-bold'>{devis.neutral_system}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Calibre disjoncteur generale:</span> <span className='ml-1 text-green-500 font-bold'>{devis.breaker}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Distance entre le TD et la ou les bornes:</span> <span className='ml-1 text-green-500 font-bold'>{devis.distance}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Type de securite de charge:</span> <span className='ml-1 text-green-500 font-bold'>{devis.secure}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Besoin d'une prise type E:</span> <span className='ml-1 text-green-500 font-bold'>{devis.type_e}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Disponibilite TD:</span> <span className='ml-1 text-green-500 font-bold'>{devis.dispo_td}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Puissance de charge souhaiter:</span> <span className='ml-1 text-green-500 font-bold'>{devis.power_charging}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Nombres de points de charges:</span> <span className='ml-1 text-green-500 font-bold'>{devis.charge_points}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Nombres de bornes:</span> <span className='ml-1 text-green-500 font-bold'>{devis.box_nb}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Relever terrain effectuer par:</span> <span className='ml-1 text-green-500 font-bold'>{devis.user_email}</span></p>
+
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Numero de devis:</span> <span className='ml-1 text-green-500 font-bold'>{devis.id}</span></p>
+
+                    <div className='flex justify-between mt-2'>
+                        <Link
+                        to={`/devis`}
+                        className="bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 m-1 px-4 py-2 m-1 rounded transition-all duration-300"
+                        > 
+                            Retour aux devis
+                        </Link>
+
+                        <button 
+                        type="button"
+                        className="delete-button bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 m-1 px-4 py-2 m-1 rounded transition-all duration-300" 
+                        >
+                            Voir les photos
+                        </button>
+                    </div>
+                </div>
         </div>
     );
 }
+
+// onClick={showImgDevis}
