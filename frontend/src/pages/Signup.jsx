@@ -56,20 +56,25 @@ function Signup() {
     };
 
     return (
-        <section className=''>
-            <h2 className=' text-2xl font-semibold'>Inscription</h2>
+        <section className='w-full h-screen ml-10 mr-10 sm:ml-20 sm:mr-20 md:ml-36 md:mr-36 lg:ml-96 lg:mr-96'>
+             <div>
+                <h2 className='title-signin text-4xl bg-white w-full py-5 shadow-2xl rounded-lg text-center font-semibold mt-20'>Bienvenue sur estimate tool !</h2>
+            </div>
+            <div>
+                <h2 className='title-signup text-center font-semibold mt-20'>Inscrivez un utilisateur ici, n'oublier pas de lui definir un role !</h2>
+            </div>
             {error && (
                 <div className="bg-white text-sm font-semibold p-1 my-1 rounded shadow" role="alert">
                     {error}
                 </div>
             )}
-            <form onSubmit={handleSubmit} className=' bg-opacity-25 bg-purple-500 p-5 rounded-md shadow w-72'>
+            <form onSubmit={handleSubmit} className='bg-opacity-25 bg-white p-5 rounded-md shadow-2xl mt-10'>
                 <div className="mb-6">
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email :</label>
+                    <label htmlFor="email" className="block mb-2 text-md font-medium text-green-500 underline">Email :</label>
                     <input
                         type="email"
                         id="email"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="text-gray-900 text-md rounded-lg block w-full p-2.5 shadow-2xl bg-white focus:outline-none"
                         placeholder="Votre Email"
                         name="email"
                         minLength={3}
@@ -81,11 +86,11 @@ function Signup() {
                     />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de Passe :</label>
+                    <label htmlFor="password" className="block mb-2 text-md font-medium text-green-500 underline">Mot de Passe :</label>
                     <input
                         type="password"
                         id="password"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="text-gray-900 text-md rounded-lg block w-full p-2.5 shadow-2xl bg-white focus:outline-none"
                         placeholder="************"
                         name="password"
                         minLength={3}
@@ -96,9 +101,16 @@ function Signup() {
                         required
                     />
                 </div>
+                <select
+                    className="mt-4 shadow-xl text-sm rounded-lg outline-none w-full p-2.5"
+                >
+                    <option value="" disabled>Role du compte:</option>
+                    <option value="Admin">Administrateur</option>
+                    <option value="Employe">Employe</option>
+                </select>
                 <button
                     type="submit"
-                    className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    className="bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-6 m-1 px-4 py-2  rounded transition-all duration-300"
                 >
                     Inscription
                 </button>

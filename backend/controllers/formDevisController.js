@@ -47,3 +47,26 @@ exports.getAllFormData = async (req, res) => {
         return res.status(404).json({ message: 'Objet non Trouver' })
     }
 }
+
+exports.getOneDevis = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+
+        FormData.findOne(id)
+            .then((devis) => {
+                if (devis && devis[0] && devis[0].length > 0) {
+                    res.status(200).json(devis[0]);
+                    console.log(devis)
+                } else {
+                    res.status(404).json({ message: 'Client non trouvé' });
+                }
+            })
+            .catch((error) => {
+                console.error("Error when retrieving the item:", error);
+                res.status(500).json({ message: 'Internal Server Error' });
+            });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}

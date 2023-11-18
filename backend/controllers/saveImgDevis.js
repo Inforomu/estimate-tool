@@ -45,6 +45,26 @@ exports.getAllImages = async (req, res) => {
     try {
         const allImages = await Image.getAllImages();
         res.json({ images: allImages });
+        // const stringData = JSON.stringify(allImages[0][0].image_data)
+        // const jsonData = JSON.parse(stringData)
+        
+        // let temp = ''
+        // jsonData.data.map(e=>{
+        //     temp += e.toString(16)
+        // })
+
+        // const buffer = Buffer.from(temp, 'hex')
+        // fs.writeFileSync('test.jpg', buffer, 'binary')
+
+        allImages[0].map(e => {
+            if (e.image_data !== null || e.image_data !== undefined) {
+               const binaryImg = Buffer.from(e.image_data, 'hex').toString('base64');
+               fs.writeFileSync('image.txt', binaryImg, 'binary');
+            }
+        })
+
+
+        // console.log(allImages)
     } catch (error) {
         console.error('controller affichage img plante:', error);
         res.status(500).json({ error: 'controller affichage img plante' });

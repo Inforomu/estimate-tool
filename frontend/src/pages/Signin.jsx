@@ -70,14 +70,14 @@ function Signin() {
                 <h2 className='title-signin text-4xl bg-white w-full py-5 shadow-2xl rounded-lg text-center font-semibold mt-20'>Bienvenue sur estimate tool !</h2>
             </div>
             <div>
-                <h2 className=' text-2xl text-center font-semibold mt-20'>Connectez-vous ici !</h2>
+                <h2 className='title-signin text-2xl text-center font-semibold mt-20'>Connectez-vous ici !</h2>
             </div>
             {error && (
                 <div className="bg-red-300 text-sm font-semibold p-1 my-1 rounded shadow" role="alert">
                     {error}
                 </div>
             )}
-            <form onSubmit={handleSubmit} className='bg-opacity-25 bg-white p-5 rounded-md shadow-2xl'>
+            <form onSubmit={handleSubmit} className='bg-opacity-25 bg-white p-5 rounded-md shadow-2xl mt-10'>
                 <div className="mb-6">
                     <label htmlFor="email" className="block mb-2 text-md font-medium text-green-500 underline">Email :</label>
                     <input
