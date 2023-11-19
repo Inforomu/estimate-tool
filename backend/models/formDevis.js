@@ -20,6 +20,7 @@ class DevisData {
         this.charge_points = data.charge_points;
         this.box_nb = data.box_nb;
         this.author_id = data.author_id;
+        this.client_id = data.client_id;
         this.id = data.id;
     }
 
@@ -27,9 +28,9 @@ class DevisData {
         const sql = `
         INSERT INTO Devis (
             power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging,
-            charge_points, box_nb, author_id
+            charge_points, box_nb, author_id, client_id
         )
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         const values = [
@@ -50,7 +51,8 @@ class DevisData {
             this.power_charging,
             this.charge_points,
             this.box_nb,
-            this.author_id
+            this.author_id,
+            this.client_id,
         ];
 
         try {
@@ -65,9 +67,11 @@ class DevisData {
         let sql = `
         SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb,
         Users.email AS user_email,
+        Clients.email AS client_email,
         Devis_Image.id AS devis_image_id
         FROM Devis
         INNER JOIN Users ON Devis.author_id = Users.id
+        LEFT JOIN Clients ON Devis.client_id = Clients.id
         LEFT JOIN Devis_Image ON Devis.id = Devis_Image.devis_id;
         `;
         try {
@@ -81,9 +85,11 @@ class DevisData {
     static async findOne(id) {
         let sql = `
         SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb,
-        Users.email AS user_email
+        Users.email AS user_email,
+        Clients.email AS client_email
         FROM Devis
         INNER JOIN Users ON Devis.author_id = Users.id
+        INNER JOIN Clients ON Devis.client_id = Clients.id
         WHERE Devis.id = ?;
           `;
     

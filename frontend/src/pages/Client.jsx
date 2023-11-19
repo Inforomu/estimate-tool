@@ -61,7 +61,7 @@ export default function showClient() {
                         </div>
                     ) : (
                         <>
-                            <div className='mt-2 text-2xl font-semibold text-center underline'>
+                            <div className='title-signin mt-2 text-2xl font-semibold text-center underline'>
                             <h2>Liste des Clients</h2>
                             </div>
                             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 m-2 sm:m-5 md:m-10'>
