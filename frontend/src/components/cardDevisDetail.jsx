@@ -54,6 +54,8 @@ export default function cardDevisDetail({ devis }) {
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Relever terrain effectuer par:</span> <span className='ml-1 text-green-500 font-bold'>{devis.user_email}</span></p>
 
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Numero de devis:</span> <span className='ml-1 text-green-500 font-bold'>{devis.id}</span></p>
+                    
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Numero de devis:</span> <span className='ml-1 text-green-500 font-bold'>{devis.client_email}</span></p>
 
                     <div className='flex justify-between mt-2'>
                         <Link

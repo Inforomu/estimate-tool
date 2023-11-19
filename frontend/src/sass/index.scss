@@ -12,6 +12,17 @@
     src: url(fonts/VarelaRound-Regular.ttf);
 }
 
+::-webkit-scrollbar {
+    width: .7rem;
+    background: rgb(200, 201, 200);
+    border-radius: .4rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #08b811;
+    border-radius: .4rem;
+}
+
 
 * {
     margin: 0;

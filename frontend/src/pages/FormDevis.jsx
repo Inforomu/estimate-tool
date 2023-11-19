@@ -3,6 +3,7 @@ import {React, useState} from 'react';
 import backArrow from '../assets/backArrow.png';
 import trashImg from '../assets/supprimer.png';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function FormDevis() {
 
@@ -24,6 +25,7 @@ export default function FormDevis() {
     const [power_charging, setPower_charging] = useState('');
     const [charge_points, setCharge_points] = useState('');
     const [box_nb, setBox_nb] = useState('');
+    const { id: client_id } = useParams();
 
     const handleFileSave = (e) => {
         const files = e.target.files;
@@ -69,8 +71,9 @@ export default function FormDevis() {
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
         // console.log(apiUrl)
         if (power_contract !== '') {
-            const dataFormData = { power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging, charge_points, box_nb};
+            const dataFormData = { power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging, charge_points, box_nb, client_id};
             console.log(dataFormData);
+            console.log(client_id)
             
             try {
                 const token = Cookies.get('token');

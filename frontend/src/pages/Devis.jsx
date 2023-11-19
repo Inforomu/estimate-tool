@@ -61,8 +61,10 @@ export default function Devis() {
                             {error}
                         </div>
                     ) : (
-                        <>
-                            <h2 className='text-2xl font-semibold py-2 text-center underline'>Liste des Devis</h2>
+                        <>  
+                            <div>
+                            <h2 className='title-signin font-semibold py-2 text-center underline'>Liste des Devis</h2>
+                            </div>
                             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 m-20'>
                                 {devis.map((devis) => (
                                     <CardDevis key={devis.id} devis={devis} onDelete={handleDelete}/>

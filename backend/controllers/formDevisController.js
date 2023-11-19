@@ -22,7 +22,8 @@ exports.submitForm = async (req, res) => {
             power_charging: req.body.power_charging,
             charge_points: req.body.charge_points,
             box_nb: req.body.box_nb,
-            author_id: req.userID
+            author_id: req.userID, 
+            client_id: req.body.client_id,
 
         });
         const formDataResult = await formData.save(formData, userId);
