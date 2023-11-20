@@ -21,6 +21,7 @@ class DevisData {
         this.box_nb = data.box_nb;
         this.author_id = data.author_id;
         this.client_id = data.client_id;
+        this.observation = data.observation;
         this.id = data.id;
     }
 
@@ -28,9 +29,9 @@ class DevisData {
         const sql = `
         INSERT INTO Devis (
             power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging,
-            charge_points, box_nb, author_id, client_id
+            charge_points, box_nb, author_id, client_id, observation
         )
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         const values = [
@@ -53,6 +54,7 @@ class DevisData {
             this.box_nb,
             this.author_id,
             this.client_id,
+            this.observation,
         ];
 
         try {
@@ -65,7 +67,7 @@ class DevisData {
 
     static async find() {
         let sql = `
-        SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb,
+        SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb, Devis.observation,
         Users.email AS user_email,
         Clients.email AS client_email,
         Devis_Image.id AS devis_image_id
@@ -84,7 +86,7 @@ class DevisData {
 
     static async findOne(id) {
         let sql = `
-        SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb,
+        SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb, Devis.observation,
         Users.email AS user_email,
         Clients.email AS client_email
         FROM Devis

@@ -25,6 +25,7 @@ export default function FormDevis() {
     const [power_charging, setPower_charging] = useState('');
     const [charge_points, setCharge_points] = useState('');
     const [box_nb, setBox_nb] = useState('');
+    const [observation, setObservation] = useState('');
     const { id: client_id } = useParams();
 
     const handleFileSave = (e) => {
@@ -63,6 +64,7 @@ export default function FormDevis() {
         setPower_charging('');
         setCharge_points('');
         setBox_nb('');
+        setObservation('');
     };
 
 
@@ -71,7 +73,7 @@ export default function FormDevis() {
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
         // console.log(apiUrl)
         if (power_contract !== '') {
-            const dataFormData = { power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging, charge_points, box_nb, client_id};
+            const dataFormData = { power_contract, power_yg, contract, electric_controller, telereport, wifi, mobile, ground_res, neutral_system, breaker, distance, secure, type_e, dispo_td, power_charging, charge_points, box_nb, client_id, observation};
             console.log(dataFormData);
             console.log(client_id)
             
@@ -318,6 +320,19 @@ export default function FormDevis() {
                         />
                         <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de bornes de recharges souhaiter
                         </label>
+                    </div>
+                    <div className='relative z-0 w-full mb-6 mt-4 group'>
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 text-black">Vos observations: </label>
+                        <textarea 
+                            rows="4" 
+                            className='block p-2.5 w-full text-sm text-gray-900 bg-white shadow-lg border-none rounded-lg border border-gray-300 resize-none focus:outline-green-600' 
+                            placeholder='Noter vos observations ici ...'
+                            value={observation}
+                            onChange={(e) => setObservation(e.target.value)}
+                        >
+
+                        </textarea>
+                        
                     </div>
                     <div className="bg-white shadow-xl rounded-lg">
                         <input
