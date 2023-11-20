@@ -60,14 +60,14 @@ export default function cardDevisDetail({ devis }) {
                     <div className='flex justify-between mt-2'>
                         <Link
                         to={`/devis`}
-                        className="bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 m-1 px-4 py-2 m-1 rounded transition-all duration-300"
+                        className="bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 m-1 px-4 py-2  rounded transition-all duration-300"
                         > 
                             Retour aux devis
                         </Link>
 
                         <button 
                         type="button"
-                        className="delete-button bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 m-1 px-4 py-2 m-1 rounded transition-all duration-300" 
+                        className="delete-button bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 px-4 py-2 m-1 rounded transition-all duration-300" 
                         >
                             Voir les photos
                         </button>
