@@ -99,7 +99,7 @@ function Signin() {
                     <input
                         type="password"
                         id="password"
-                        className="text-gray-900 text-md rounded-lg block w-full p-2.5 shadow-2xl bg-white"
+                        className="text-gray-900 text-md rounded-lg block w-full focus:outline-none p-2.5 shadow-2xl bg-white"
                         placeholder="********"
                         name="password"
                         minLength={3}

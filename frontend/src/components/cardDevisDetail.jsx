@@ -51,6 +51,8 @@ export default function cardDevisDetail({ devis }) {
 
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Nombres de bornes:</span> <span className='ml-1 text-green-500 font-bold'>{devis.box_nb}</span></p>
 
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Observations pour ce client:</span> <span className='ml-1 text-green-500 font-bold'>{devis.observation}</span></p>
+                                    
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Relever terrain effectuer par:</span> <span className='ml-1 text-green-500 font-bold'>{devis.user_email}</span></p>
 
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Numero de devis:</span> <span className='ml-1 text-green-500 font-bold'>{devis.id}</span></p>

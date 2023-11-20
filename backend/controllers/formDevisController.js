@@ -24,6 +24,7 @@ exports.submitForm = async (req, res) => {
             box_nb: req.body.box_nb,
             author_id: req.userID, 
             client_id: req.body.client_id,
+            observation: req.body.observation,
 
         });
         const formDataResult = await formData.save(formData, userId);
