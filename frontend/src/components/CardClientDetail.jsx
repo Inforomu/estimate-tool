@@ -29,12 +29,6 @@ export default function CardClientDetail({ client }) {
       <p className='py-2 my-1 border bg-slate-50 rounded shadow pl-2'>
         <span className="font-bold">Description :</span> {client.description}
       </p>
-      <Link
-          to={`/clients`}
-          className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 px-4 py-4 rounded transition-all duration-300"
-      > 
-          Retour aux clients
-      </Link>
     </>
   )
 }

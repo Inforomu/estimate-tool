@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import loadingImage from '../assets/loading.png';
 import CardClientDetail from '../components/CardClientDetail';
 
@@ -131,6 +131,12 @@ export default function showClient() {
               <div className="bg-white border border-gray-200 rounded-lg shadow w-full sm:w-2/3 md:w-1/2 mx-5">
                 <div className="p-5">
                   <CardClientDetail client={client} />
+                  <Link
+                    to={`/clients`}
+                    className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white px-4 py-4 rounded transition-all duration-300 m-3"
+                  >
+                    Retour aux clients
+                  </Link>
                   <button onClick={handleModifyClick} className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white px-4 py-4 rounded transition-all duration-300 m-3">
                     Modifier
                   </button>

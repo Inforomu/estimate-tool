@@ -40,9 +40,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <header>
-      <NavLogo />
-    </header>
+     {user.isLogged && <header><NavLogo /></header>}
     <main>
       <Routes>
         {user.isLogged ? (
