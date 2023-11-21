@@ -5,6 +5,7 @@ function Signup() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('');
     const [error, setError] = useState(null);
 
     const navigate = useNavigate();
@@ -17,19 +18,26 @@ function Signup() {
         setPassword(e.target.value);
     };
 
+    const handleRoleChange = (e) => {
+        const selectedRole = e.target.value;
+        setRole(selectedRole);
+    };
+    
     function resetForm() {
         setEmail('');
         setPassword('');
+        setRole('');
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const userData = { email, password };
+        const userData = { email, password, role };
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 
         try {
+            console.log(userData);
             const response = await fetch(`${apiUrl}/api/auth/signup`, {
                 method: 'POST',
                 headers: {
@@ -102,11 +110,11 @@ function Signup() {
                     />
                 </div>
                 <select
-                    className="mt-4 shadow-xl text-sm rounded-lg outline-none w-full p-2.5"
+                    className="mt-4 shadow-xl text-sm rounded-lg outline-none w-full p-2.5" required value={role} onChange={handleRoleChange}
                 >
-                    <option value="" disabled>Role du compte:</option>
-                    <option value="Admin">Administrateur</option>
-                    <option value="Employe">Employe</option>
+                    <option value="" disabled>Selectionner un Role :</option>
+                    <option value="employe">Employe</option>
+                    <option value="admin">Administrateur</option>
                 </select>
                 <button
                     type="submit"

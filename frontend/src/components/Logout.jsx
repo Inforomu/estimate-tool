@@ -11,6 +11,7 @@ export default function Logout(props) {
         Cookies.remove('token');
         Cookies.remove('id');
         Cookies.remove('email');
+        Cookies.remove('role');
         console.log('vous etes déconnecter');
     };
 

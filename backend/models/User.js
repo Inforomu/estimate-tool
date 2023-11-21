@@ -1,18 +1,19 @@
 const db = require('../config/db');
 
 class User {
-    constructor(email, password) {
+    constructor(email, password, role) {
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     async save() {
         const sql = `
-            INSERT INTO Users (email, password)
-            VALUES (?, ?)
+            INSERT INTO Users (email, password, role)
+            VALUES (?, ?, ?)
         `;
 
-        const values = [this.email, this.password];
+        const values = [this.email, this.password, this.role];
 
         try {
             const [result] = await db.execute(sql, values);

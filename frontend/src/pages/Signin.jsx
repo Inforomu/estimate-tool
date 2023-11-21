@@ -47,6 +47,7 @@ function Signin() {
                 Cookies.set('token', loginData.token);
                 Cookies.set('id', loginData.userID);
                 Cookies.set('email', loginData.email);
+                Cookies.set('role', loginData.role);
                 setUserState({ isLogged: true });
                 navigate('/')
                 resetForm()
