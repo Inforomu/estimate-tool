@@ -35,6 +35,7 @@ function App() {
       Cookies.remove('token');
       Cookies.remove('id');
       Cookies.remove('email');
+      Cookies.remove('role');
     }
   }, []);
 
@@ -45,8 +46,10 @@ function App() {
       <Routes>
         {user.isLogged ? (
           <>
+          {Cookies.get('role') === 'admin' && (
+            <Route path="/signup" element={<Signup />} />
+          )}
             <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<Navigate to="/" />} />
             <Route path="/formdevis/:id" element={<FormDevis />} />
             <Route path="/formclient" element={<FormClient />} />
             <Route path="/clients" element={<Client />} />
@@ -57,7 +60,6 @@ function App() {
           </>
         ) : (
           <>
-            <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<Signin />} />
           </>
         )}

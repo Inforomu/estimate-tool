@@ -6,11 +6,13 @@ const jwt = require('jsonwebtoken');
 exports.signup = async (req, res, next) => {
     try {
         console.log(req.body);
-        bcrypt.hash(req.body.password, 10)
+        const { email, password, role } = req.body;
+        bcrypt.hash(password, 10)
         .then(hash => {
             const user = new User (
-                req.body.email,
-                hash
+                email,
+                hash,
+                role
             );
             user.save()
             .then(() => res.status(201).json({message: 'User created '}))
@@ -37,6 +39,7 @@ exports.login = async (req, res, next) => {
         res.status(200).json({
             email: user.email,
             userID: user.id,
+            role: user.role,
             token: jwt.sign(
                 { userID: user.id },
                 'RANDOM_TOKEN_SECRET',
