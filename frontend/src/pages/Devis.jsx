@@ -3,13 +3,15 @@ import Cookies from 'js-cookie';
 import CardDevis from '../components/cardDevis';
 import { Link } from 'react-router-dom';
 import backArrow from '../assets/backArrow.png'
-import loadingImage from '../assets/loading.png'
+import loadingImage from '../assets/loading.png';
+import SearchBarDevis from '../components/SearchBarDevis';
 
 export default function Devis() {
 
     const [devis, setDevis] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [sortDevis, setSortDevis] = useState([]);
 
 
 
@@ -32,6 +34,9 @@ export default function Devis() {
             .then((data) => {
                 console.log(data);
                 setDevis(data);
+                const sortedDevis = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                const lastTenDevis = sortedDevis.slice(0, 10);
+                setSortDevis(lastTenDevis)
                 setLoading(false);
             })
             .catch((error) => {
@@ -63,7 +68,12 @@ export default function Devis() {
                     ) : (
                         <>  
                             <div>
-                            <h2 className='title-signin font-semibold py-2 text-center underline'>Liste des Devis</h2>
+                                <h2 className='title-signin font-semibold py-2 text-center underline'>Liste des Devis
+                                </h2>
+                            </div>
+                            <SearchBarDevis devis={devis} />
+                            <div className=' mt-2 text-2xl font-semibold text-center text-green-500'>
+                                <h2>Nos derniers Devis (10)</h2>
                             </div>
                             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 m-20'>
                                 {devis.map((devis) => (

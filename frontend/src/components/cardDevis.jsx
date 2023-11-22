@@ -12,8 +12,8 @@ export default function CardDevis({ devis, onDelete }) {
 
     return (
         <div className="bg-white w-full h-full rounded-lg shadow-lg p-4 m-2">
-            <p><span className='font-bold'>Relever terrain effectuer par:</span> {devis.user_email}</p>
-            <p><span className='font-bold'>Pour le dossier client: </span> {devis.client_email}</p>
+            <p><span className='paragraph-card-devis font-bold'>Relever terrain effectuer par:</span> {devis.user_email}</p>
+            <p><span className='paragraph-card-devis font-bold'>Pour le dossier client: </span> {devis.client_email}</p>
             <div className='flex justify-between mt-2'>
                 <button 
                     type="button"
