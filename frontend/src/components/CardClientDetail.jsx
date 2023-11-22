@@ -29,6 +29,9 @@ export default function CardClientDetail({ client }) {
       <p className='py-2 my-1 border bg-slate-50 rounded shadow pl-2'>
         <span className="font-bold">Description :</span> {client.description}
       </p>
+      <p className='py-2 my-1 border bg-slate-50 rounded shadow pl-2'>
+        <span className="font-bold">Description :</span> {client.devis_id}
+      </p>
     </>
   )
 }

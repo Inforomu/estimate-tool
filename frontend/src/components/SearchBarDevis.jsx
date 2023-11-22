@@ -1,33 +1,35 @@
-import { useState } from 'react';
-import CardClient from './CardClient';
+import React, { useState } from 'react'
+import CardDevis from './cardDevis';
 
-const SearchBar = ({ clients }) => {
 
+export default function SearchBarDevis( {devis} ) {
+    
     const [searchTerm, setSearchTerm] = useState('');
-    const [filteredClients, setFilteredClients] = useState([]);
+    const [filteredDevis, setFilteredDevis] = useState([]);
 
-    const handleClientChange = (e) => {
+    const handleDevisChange = (e) => {
         const term = e.target.value;
         setSearchTerm(term);
-        filterClients(term);
-    };
+        filterDevis(term);
+    }
 
-    const filterClients = (term) => {
-        const filtered = clients.filter(client =>
-            client.nom.toLowerCase().includes(term.toLowerCase()) ||
-            client.prenom.toLowerCase().includes(term.toLowerCase()) ||
-            client.email.toLowerCase().includes(term.toLowerCase())
+    const filterDevis = (term) => {
+        const filtered = devis.filter(devis => 
+            devis.client_email.toLowerCase().includes(term.toLowerCase()) ||
+            devis.user_email.toLowerCase().includes(term.toLowerCase()) ||
+            devis.contract.toLowerCase().includes(term.toLowerCase())
         );
-        setFilteredClients(filtered);
-    };
+        setFilteredDevis(filtered);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        filterClients(searchTerm);
-    };
-
+        filterDevis(searchTerm);
+    }
+  
+  
     return (
-        <>
+        <div>
             <form onSubmit={handleSubmit} className='flex justify-center py-10 '>
                 <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
                     Recherche
@@ -47,9 +49,9 @@ const SearchBar = ({ clients }) => {
                     <input
                         type="search"
                         id="default-search"
-                        className=" shadow w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-green-600"
-                        placeholder="Recherche du client par nom, prenom, email"
-                        onChange={handleClientChange}
+                        className="shadow w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-green-600"
+                        placeholder="Recherche du devis par email du createur du devis ou email du client"
+                        onChange={handleDevisChange}
                         required
                     />
                     <button
@@ -63,15 +65,12 @@ const SearchBar = ({ clients }) => {
             </form>
             {searchTerm && (
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 m-2 sm:m-5 md:m-10'>
-                    {filteredClients.map(client => (
-                        <CardClient key={client.id} clients={client}/>
+                    {filteredDevis.map(devis => (
+                        <CardDevis key={devis.id} devis={devis}/>
                     ))}
                 </div>
             )}
             <hr className='h-px my-5 bg-gray-800 shadow'/>
-
-        </>
-    );
-};
-
-export default SearchBar;
+        </div>
+    )
+}
