@@ -1,33 +1,34 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
 export default function CardClient({ clients }) {
 
     return (
-        <div className="bg-white w-full h-full rounded-lg shadow-lg sm:p-4 py-4 px-2">
-            <div className='flex flex-col justify-between items-center'>
-                <div>
-                    <p><span className="font-bold">Nom du client :</span> {clients.nom}</p>
-                    <p><span className="font-bold">Prenom du client :</span> {clients.prenom}</p>
-                    <p><span className="font-bold">email :</span> {clients.email}</p>
-                </div>
-                <div className='w-3/4 xs:w-1/2 sm:w-full flex justify-around items-around flex-col sm:flex-row text-center'>
-                    <Link
+        <tr className="bg-white border hover:border-y-2 hover:font-semibold hover:border-y-green-500 hover:text-black transition ">
+            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                {clients.nom}
+            </th>
+            <td className="px-6 py-4">
+                {clients.prenom}
+            </td>
+            <td className="px-6 py-4">
+                {clients.ville}
+            </td>
+            <td className='flex flex-wrap md:flex-none p-1'>
+                <Link
                     to={`/clients/${clients.id}`}
-                    className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 px-4 py-4 rounded transition-all duration-300"
-                    > 
-                        Voir Détails
-                    </Link>
-                    <Link
+                    className="bg-white border text-green-500 shadow hover:bg-green-500 hover:text-white mx-3 p-3 rounded transition-all duration-300"
+                >
+                    Voir Détails
+                </Link>
+                <Link
                     to={`/formdevis/${clients.id}`}
-                    className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 px-4 py-4 rounded transition-all duration-300"
-                    >
-                        Créer Devis
-                    </Link>
-                </div>
-                
-            </div>
-        </div>
-      );
+                    className="bg-white border text-green-500 shadow hover:bg-green-500 hover:text-white mx-3 p-3 rounded transition-all duration-300"
+                >
+                    Créer Devis
+                </Link>
+            </td>
+        </tr>
+    );
 }
+

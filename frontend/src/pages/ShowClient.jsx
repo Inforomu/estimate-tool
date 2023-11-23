@@ -154,7 +154,7 @@ export default function showClient() {
                           className="bg-white text-green-900 text-md rounded-lg block w-full p-2.5"
                           id="grid-first-name"
                           type="text"
-                          placeholder="Prénom"
+                          placeholder={client.prenom}
                           value={prenom}
                           onChange={(e) => setPrenom(e.target.value)}
                         />
@@ -167,7 +167,7 @@ export default function showClient() {
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="grid-last-name"
                           type="text"
-                          placeholder="Nom"
+                          placeholder={client.nom}
                           value={nom}
                           onChange={(e) => setNom(e.target.value)}
                         />
@@ -182,7 +182,7 @@ export default function showClient() {
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="grid-password"
                           type="email"
-                          placeholder="123abc@gmail.com"
+                          placeholder={client.email}
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
@@ -197,7 +197,7 @@ export default function showClient() {
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="telephone"
                           type="tel"
-                          placeholder="0601020304"
+                          placeholder={client.telephone}
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                         />
@@ -212,7 +212,7 @@ export default function showClient() {
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="grid-city"
                           type="text"
-                          placeholder="ex : Paris"
+                          placeholder={client.ville}
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
                         />
@@ -225,7 +225,7 @@ export default function showClient() {
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="grid-zip"
                           type="text"
-                          placeholder="90210"
+                          placeholder={client.zipcode}
                           value={zip_code}
                           onChange={(e) => setZip_code(e.target.value)}
                         />
@@ -240,7 +240,7 @@ export default function showClient() {
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="grid-password"
                           type="text"
-                          placeholder="Numéro et Rue"
+                          placeholder={client.adresse}
                           value={adresse}
                           onChange={(e) => setAdresse(e.target.value)}
                         />
