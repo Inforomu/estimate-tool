@@ -16,7 +16,7 @@ const SearchBar = ({ clients }) => {
         const filtered = clients.filter(client =>
             client.nom.toLowerCase().includes(term.toLowerCase()) ||
             client.prenom.toLowerCase().includes(term.toLowerCase()) ||
-            client.email.toLowerCase().includes(term.toLowerCase())
+            client.ville.toLowerCase().includes(term.toLowerCase())
         );
         setFilteredClients(filtered);
     };
@@ -47,7 +47,7 @@ const SearchBar = ({ clients }) => {
                     <input
                         type="search"
                         id="default-search"
-                        className=" shadow w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-green-600"
+                        className=" shadow w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                         placeholder="Recherche du client par nom, prenom, email"
                         onChange={handleClientChange}
                         required
@@ -62,11 +62,29 @@ const SearchBar = ({ clients }) => {
                 
             </form>
             {searchTerm && (
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 m-2 sm:m-5 md:m-10'>
+                <div className="relative overflow-x-auto  md:mx-10">
+                <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-200">
+                    <thead className="text-xs text-gray-700 uppercase bg-green-200">
+                        <tr>
+                            <th scope="col" className="px-6 py-3">
+                                Nom
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Prenom
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Ville
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {filteredClients.map(client => (
                         <CardClient key={client.id} clients={client}/>
                     ))}
-                </div>
+                    </tbody>
+                </table>
+            </div>
+
             )}
             <hr className='h-px my-5 bg-gray-800 shadow'/>
 
