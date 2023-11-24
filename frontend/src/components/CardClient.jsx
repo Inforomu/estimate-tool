@@ -27,6 +27,12 @@ export default function CardClient({ clients }) {
                 >
                     Créer Devis
                 </Link>
+                <Link
+                    to={`/clients/${clients.id}/devis`}
+                    className="bg-white border text-green-500 shadow hover:bg-green-500 hover:text-white mx-3 p-3 rounded transition-all duration-300"
+                >
+                    Voir devis
+                </Link>
             </td>
         </tr>
     );

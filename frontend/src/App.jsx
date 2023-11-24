@@ -15,6 +15,7 @@ import ShowDevis from './pages/showDevis';
 import ShowImage from './pages/showImg';
 import ShowClient from './pages/ShowClient';
 import NavLogo from './components/NavLogo';
+import ShowClientDevis from './pages/showClientDevis';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
             <Route path="/formclient" element={<FormClient />} />
             <Route path="/clients" element={<Client />} />
             <Route path="/clients/:id" element={<ShowClient />} />
+            <Route path="/clients/:id/devis" element={<ShowClientDevis />} />
             <Route path="/devis" element={<Devis />} />
             <Route path="/devis/:id" element={<ShowDevis />} />
             <Route path="/image" element={<ShowImage />} />

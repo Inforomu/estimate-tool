@@ -76,10 +76,29 @@ class Client {
       `;
 
     try {
-      const result = await db.execute(sql, [id]);
+      const [result] = await db.execute(sql, [id]);
       return result;
     } catch (error) {
       throw error
+    }
+  }
+
+  static async getDevis(clientId) {
+    let sqlGetDevis = `
+    SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller,
+             Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system,
+             Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td,
+             Devis.power_charging, Devis.charge_points, Devis.box_nb, Devis.author_id, Devis.client_id,
+             Devis.created_at, Devis.observation
+    FROM Devis
+    WHERE Devis.client_id = ?;
+    `;
+
+    try {
+      const [result] = await db.execute(sqlGetDevis, [clientId]);
+      return result;
+    } catch (error) {
+      throw error;
     }
   }
 
