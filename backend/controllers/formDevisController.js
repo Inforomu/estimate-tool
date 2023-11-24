@@ -5,6 +5,7 @@ exports.submitForm = async (req, res) => {
         const userId = req.userID;
         console.log('Données reçues du formulaire :', req.body, req.userID);
         const formData = new FormData({
+            
             power_contract: req.body.power_contract,
             power_yg: req.body.power_yg,
             contract: req.body.contract,
@@ -25,10 +26,11 @@ exports.submitForm = async (req, res) => {
             author_id: req.userID, 
             client_id: req.body.client_id,
             observation: req.body.observation,
-
         });
+
         const formDataResult = await formData.save(formData, userId);
         const formDataId = formDataResult.insertId;
+
         console.log(formDataId);
         console.log('Save formulaire ok');
         res.status(201).json({ message: 'Données du formulaire enregistrées avec succès', formDataId });

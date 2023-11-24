@@ -60,3 +60,20 @@ exports.modifyClient = async (req, res, next) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 }
+
+exports.getDevis = async (req, res, next) => {
+    try {
+      const clientId = req.params.id;
+      const devisResult = await Client.getDevis(clientId);
+  
+      if (!devisResult || devisResult.length === 0) {
+        console.log('Aucun devis trouvé');
+        return res.status(404).json({ message: 'Aucun devis trouvé' });
+      }
+  
+      res.status(200).json(devisResult);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
