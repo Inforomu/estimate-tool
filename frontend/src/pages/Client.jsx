@@ -4,7 +4,7 @@ import CardClient from '../components/CardClient';
 import loadingImage from '../assets/loading.png'
 import SearchBar from '../components/SearchBar';
 
-export default function showClient() {
+export default function Client() {
 
     const [clients, setClients] = useState([]);
     const [sortClients, setSortClients] = useState([]);
@@ -60,12 +60,12 @@ export default function showClient() {
                         </div>
                     ) : (
                         <>
-                            <div className=' mt-2 text-2xl font-semibold text-center text-green-500'>
-                                <h2>Nos derniers Clients (10)</h2>
+                            <div className=' font-varela-scss mt-2 py-4 mb-10 text-2xl font-semibold text-center text-green-500'>
+                                <h2>Nos 10 derniers Clients</h2>
                             </div>
                             <div className="relative overflow-x-auto  md:mx-10">
-                                <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-200">
-                                    <thead className="text-xs text-gray-700 uppercase bg-green-200">
+                                <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-600">
+                                    <thead className="font-varela-scss text-xs text-white uppercase bg-green-600">
                                         <tr>
                                             <th scope="col" className="px-6 py-3">
                                                 Nom
@@ -75,6 +75,9 @@ export default function showClient() {
                                             </th>
                                             <th scope="col" className="px-6 py-3">
                                                 Ville
+                                            </th>
+                                            <th scope="col" className="px-6 py-3">
+                                                Code Postal
                                             </th>
                                         </tr>
                                     </thead>

@@ -43,7 +43,7 @@ export default function showDevis() {
     <div>
         <div className="bg-white border border-gray-200 rounded-lg ">
             <div className="p-5">
-              <CardDevisDetail devis={devis} />
+              <CardDevisDetail devis={devis} returnPath='/devis'/>
             </div>
         </div>
     </div>

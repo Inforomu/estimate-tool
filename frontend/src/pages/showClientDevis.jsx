@@ -36,7 +36,7 @@ export default function showClientDevis() {
     <div>
       <ul>
         {devisResult.map((devis) => (
-           <CardDevisDetail key={devis.id} devis={devis}/>
+           <CardDevisDetail key={devis.id} devis={devis} returnPath='/clients'/>
         ))}
       </ul>
     </div>
