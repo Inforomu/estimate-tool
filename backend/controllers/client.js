@@ -33,11 +33,12 @@ exports.getOneClient = async (req, res, next) => {
 
         Client.findOne(id)
             .then((client) => {
-                if (client && client[0] && client[0].length > 0) {
-                    res.status(200).json(client[0]);
+                if (client && client && client.length > 0) {
+                    res.status(200).json(client);
                 } else {
                     res.status(404).json({ message: 'Client non trouvé' });
                 }
+                console.log(client)
             })
             .catch((error) => {
                 console.error("Error when retrieving the item:", error);

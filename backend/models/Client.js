@@ -77,6 +77,7 @@ class Client {
 
     try {
       const [result] = await db.execute(sql, [id]);
+      console.log(result)
       return result;
     } catch (error) {
       throw error

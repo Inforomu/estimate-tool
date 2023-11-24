@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-export default function cardDevisDetail({ devis }) {
+export default function cardDevisDetail({ devis, returnPath }) {
 
     // const handleDeleteDevis = () => {
     //     const confirmDelete = window.confirm('Voulez-vous supprimer ce devis ?');
@@ -61,7 +61,7 @@ export default function cardDevisDetail({ devis }) {
 
                     <div className='flex justify-between mt-2'>
                         <Link
-                        to={`/devis`}
+                        to={returnPath}
                         className="bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 m-1 px-4 py-2  rounded transition-all duration-300"
                         > 
                             Retour aux devis
