@@ -64,7 +64,7 @@ export default function cardDevisDetail({ devis, returnPath }) {
                         to={returnPath}
                         className="bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 m-1 px-4 py-2  rounded transition-all duration-300"
                         > 
-                            Retour aux devis
+                            Page precedente
                         </Link>
 
                         <button 

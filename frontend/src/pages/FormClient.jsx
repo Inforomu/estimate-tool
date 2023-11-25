@@ -91,14 +91,14 @@ export default function FormClient() {
                     {error}
                 </div>
             )}
-            <form onSubmit={handleSubmit} className="w-full max-w-lg bg-opacity-25 bg-green-600 p-5 rounded-md shadow">
+            <form onSubmit={handleSubmit} className="font-varela-scss w-full max-w-lg bg-opacity-25 bg-white p-5 rounded-lg shadow-2xl">
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-green-900 outline-none text-xs font-bold mb-2" htmlFor="grid-first-name">
-                            Prenom
+                        <label className="block uppercase tracking-wide text-green-600 outline-none text-xs font-bold mb-2" htmlFor="grid-first-name">
+                            Prenom :
                         </label>
                         <input
-                            className="bg-white text-green-900 text-md rounded-lg block w-full p-2.5"
+                            className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                             id="grid-first-name"
                             type="text"
                             placeholder="Prénom"
@@ -107,11 +107,11 @@ export default function FormClient() {
                         />
                     </div>
                     <div className="w-full md:w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
-                            Nom
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                            Nom :
                         </label>
                         <input
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                             id="grid-last-name"
                             type="text"
                             placeholder="Nom"
@@ -122,11 +122,11 @@ export default function FormClient() {
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Email
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                            Email :
                         </label>
                         <input
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                             id="grid-password"
                             type="email"
                             placeholder="123abc@gmail.com"
@@ -137,11 +137,11 @@ export default function FormClient() {
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="telephone">
-                            Telephone
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="telephone">
+                            Telephone :
                         </label>
                         <input
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                             id="telephone"
                             type="tel"
                             placeholder="0601020304"
@@ -152,11 +152,11 @@ export default function FormClient() {
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-0 md:mb-6">
                     <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
-                            Ville
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-city">
+                            Ville :
                         </label>
                         <input
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                             id="grid-city"
                             type="text"
                             placeholder="ex : Paris"
@@ -165,11 +165,11 @@ export default function FormClient() {
                         />
                     </div>
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-zip">
-                            Postal
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-zip">
+                            Postal :
                         </label>
                         <input
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                             id="grid-zip"
                             type="text"
                             placeholder="90210"
@@ -180,11 +180,11 @@ export default function FormClient() {
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Adresse
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                            Adresse :
                         </label>
                         <input
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                             id="grid-password"
                             type="text"
                             placeholder="Numéro et Rue"
@@ -194,10 +194,10 @@ export default function FormClient() {
                     </div>
                 </div>
                 <div className='flex flex-wrap mb-6'>
-                    <label htmlFor="description" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Ajouter une Desciption</label>
+                    <label htmlFor="description" className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2">Ajouter une remarque au dossier du client :</label>
                     <textarea id="description" 
                         rows="4" 
-                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-xl resize-none" 
                         placeholder="Ajouté si nécessaire ..."
                         maxLength={500}
                         value={description}
@@ -205,7 +205,7 @@ export default function FormClient() {
                         >
                     </textarea>
                 </div>
-                <button type="submit" className='bg-green-500 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Créer un client</button>
+                <button type="submit" className='bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-4 mb-4 px-4 py-2 rounded transition-all duration-300'>Créer un client</button>
             </form>
         </section>
     )
