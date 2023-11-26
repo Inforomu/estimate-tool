@@ -17,7 +17,7 @@ export default function SearchBarDevis( {devis} ) {
         const filtered = devis.filter(devis => 
             devis.client_email.toLowerCase().includes(term.toLowerCase()) ||
             devis.user_email.toLowerCase().includes(term.toLowerCase()) ||
-            devis.contract.toLowerCase().includes(term.toLowerCase())
+            devis.client_ville.toLowerCase().includes(term.toLowerCase())
         );
         setFilteredDevis(filtered);
     }
@@ -64,12 +64,29 @@ export default function SearchBarDevis( {devis} ) {
                 
             </form>
             {searchTerm && (
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 m-2 sm:m-5 md:m-10'>
-                    {filteredDevis.map(devis => (
-                        <CardDevis key={devis.id} devis={devis}/>
-                    ))}
+                <div className="relative overflow-x-auto  md:mx-10">
+                    <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-600">
+                        <thead className="text-xs uppercase bg-green-600">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Nom
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Prenom
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Ville
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {filteredDevis.map(devis=> (
+                            <CardDevis key={devis.id} devis={devis}/>
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
-            )}
+            )};
             <hr className='h-px my-5 bg-gray-800 shadow'/>
         </div>
     )
