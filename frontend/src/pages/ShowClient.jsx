@@ -115,7 +115,7 @@ export default function showClient() {
   };
 
   return (
-    <section className='flex md:flex-row py-5 flex-col justify-center items-center h-full w-full'>
+    <section className='flex xl:flex-row py-5 flex-col justify-center items-center h-full w-full'>
       <>
         {loading ? (
           <div className="text-center w-full flex justify-center">
@@ -128,46 +128,41 @@ export default function showClient() {
             </div>
           ) : (
             <>
-              <div className="bg-white border border-gray-200 rounded-lg shadow w-full sm:w-2/3 md:w-1/2 mx-5">
-                <div className="p-5">
-                  <CardClientDetail client={client} />
-                  <Link
-                    to={`/clients`}
-                    className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white px-4 py-4 rounded transition-all duration-300 m-3"
-                  >
-                    Retour aux clients
-                  </Link>
-                  <button onClick={handleModifyClick} className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white px-4 py-4 rounded transition-all duration-300 m-3">
-                    Modifier
-                  </button>
-                </div>
+              <CardClientDetail client={client} />
+              <div className='py-2 flex flex-col'>
+                <button onClick={handleModifyClick} className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white px-4 py-4 rounded transition-all duration-300 m-3">
+                  Modifier
+                </button>
+                <Link to={'/clients'} className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white px-4 py-4 rounded transition-all duration-300 m-3">
+                  Retour au client
+                </Link>
               </div>
               {showForm && (
                 <div className='flex justify-center items-center m-5 '>
-                  <form onSubmit={handleModify} className="w-full max-w-lg bg-opacity-25 bg-green-600 p-5 rounded-md shadow">
+                  <form onSubmit={handleModify} className="font-varela-scss w-full max-w-lg bg-opacity-25 bg-white p-5 rounded-lg shadow-2xl">
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-green-900 outline-none text-xs font-bold mb-2" htmlFor="grid-first-name">
-                          Prenom
+                        <label className="block uppercase tracking-wide text-green-600 outline-none text-xs font-bold mb-2" htmlFor="grid-first-name">
+                          Prenom :
                         </label>
                         <input
-                          className="bg-white text-green-900 text-md rounded-lg block w-full p-2.5"
+                          className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                           id="grid-first-name"
                           type="text"
-                          placeholder={client.prenom}
+                          placeholder="Prénom"
                           value={prenom}
                           onChange={(e) => setPrenom(e.target.value)}
                         />
                       </div>
                       <div className="w-full md:w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
-                          Nom
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                          Nom :
                         </label>
                         <input
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                           id="grid-last-name"
                           type="text"
-                          placeholder={client.nom}
+                          placeholder="Nom"
                           value={nom}
                           onChange={(e) => setNom(e.target.value)}
                         />
@@ -175,14 +170,14 @@ export default function showClient() {
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-                          Email
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                          Email :
                         </label>
                         <input
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                           id="grid-password"
                           type="email"
-                          placeholder={client.email}
+                          placeholder="123abc@gmail.com"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
@@ -190,14 +185,14 @@ export default function showClient() {
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="telephone">
-                          Telephone
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="telephone">
+                          Telephone :
                         </label>
                         <input
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                           id="telephone"
                           type="tel"
-                          placeholder={client.telephone}
+                          placeholder="0601020304"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                         />
@@ -205,27 +200,27 @@ export default function showClient() {
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-0 md:mb-6">
                       <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
-                          Ville
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-city">
+                          Ville :
                         </label>
                         <input
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                           id="grid-city"
                           type="text"
-                          placeholder={client.ville}
+                          placeholder="ex : Paris"
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
                         />
                       </div>
                       <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-zip">
-                          Postal
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-zip">
+                          Postal :
                         </label>
                         <input
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                           id="grid-zip"
                           type="text"
-                          placeholder={client.zipcode}
+                          placeholder="90210"
                           value={zip_code}
                           onChange={(e) => setZip_code(e.target.value)}
                         />
@@ -233,24 +228,24 @@ export default function showClient() {
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-                          Adresse
+                        <label className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                          Adresse :
                         </label>
                         <input
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-white text-md rounded-lg shadow-lg block w-full p-2.5 focus:outline-green-600"
                           id="grid-password"
                           type="text"
-                          placeholder={client.adresse}
+                          placeholder="Numéro et Rue"
                           value={adresse}
                           onChange={(e) => setAdresse(e.target.value)}
                         />
                       </div>
                     </div>
                     <div className='flex flex-wrap mb-6'>
-                      <label htmlFor="description" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Ajouter une Desciption</label>
+                      <label htmlFor="description" className="block uppercase tracking-wide text-green-600 text-xs font-bold mb-2">Ajouter une remarque au dossier du client :</label>
                       <textarea id="description"
                         rows="4"
-                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-xl resize-none"
                         placeholder="Ajouté si nécessaire ..."
                         maxLength={500}
                         value={description}
@@ -258,7 +253,7 @@ export default function showClient() {
                       >
                       </textarea>
                     </div>
-                    <button type="submit" className='bg-green-500 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Modifier le client</button>
+                    <button type="submit" className='bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-4 mb-4 px-4 py-3 rounded transition-all duration-300'>Modifier le client</button>
                   </form>
                 </div>
               )}
