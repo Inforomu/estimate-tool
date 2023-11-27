@@ -64,19 +64,19 @@ export default function Client() {
                                 <h2>Nos 10 derniers Clients</h2>
                             </div>
                             <div className="relative overflow-x-auto  md:mx-10">
-                                <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-600">
+                                <table className="w-full text-sm md:text-left rtl:text-right rounded shadow bg-green-600 text-center">
                                     <thead className="font-varela-scss text-xs text-white uppercase bg-green-600">
                                         <tr>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="md:px-6 py-3">
                                                 Nom
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="md:px-6 py-3">
                                                 Prenom
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="md:px-6 py-3">
                                                 Ville
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="md:px-6 py-3">
                                                 Code Postal
                                             </th>
                                         </tr>

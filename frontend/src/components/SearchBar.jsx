@@ -63,8 +63,8 @@ const SearchBar = ({ clients }) => {
             </form>
             {searchTerm && (
                 <div className="relative overflow-x-auto  md:mx-10">
-                <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-200">
-                    <thead className="text-xs text-gray-700 uppercase bg-green-200">
+                <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-600">
+                    <thead className="font-varela-scss text-xs text-white uppercase bg-green-600">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 Nom
@@ -74,6 +74,9 @@ const SearchBar = ({ clients }) => {
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Ville
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Code Postal
                             </th>
                         </tr>
                     </thead>
