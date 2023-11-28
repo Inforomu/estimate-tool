@@ -35,6 +35,24 @@ class Image {
         return db.query(sql);
     }
 
+    static getImagesForDevis(devisId) {
+        const sql = `
+            SELECT Image.image_data
+            FROM Image
+            JOIN Devis_Image ON Image.id = Devis_Image.image_id
+            WHERE Devis_Image.devis_id = ?
+        `;
+
+        try {
+            return db.query(sql, [devisId]);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des images pour le devis', error);
+            throw error;
+        }
+    }
+
+    
+
     async linkToDevis(devisId) {
         const linkSql = `
         INSERT INTO Devis_Image (

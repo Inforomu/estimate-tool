@@ -72,13 +72,30 @@ export default function Devis() {
                                 </h2>
                             </div>
                             <SearchBarDevis devis={devis} />
-                            <div className=' mt-2 text-2xl font-semibold text-center text-green-500'>
-                                <h2>Nos derniers Devis (10)</h2>
-                            </div>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 m-20'>
-                                {devis.map((devis) => (
-                                    <CardDevis key={devis.id} devis={devis} onDelete={handleDelete}/>
-                                ))}
+                            <div classname='relative overflow-x-auto md: mx-10'>
+                            <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-600">
+                                    <thead className="font-varela-scss text-xs text-white uppercase bg-green-600">
+                                        <tr>
+                                            <th scope="col" className="px-6 py-3">
+                                                Nom du client
+                                            </th>
+                                            <th scope="col" className="px-6 py-3">
+                                                Créateur du devis
+                                            </th>
+                                            <th scope="col" className="px-6 py-3">
+                                                Ville
+                                            </th>
+                                            <th scope="col" className="px-6 py-3">
+                                                Code Postal
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {sortDevis.map((devis) => (
+                                            <CardDevis key={devis.id} devis={devis} />
+                                        ))}
+                                    </tbody>
+                                </table>
                             </div>
                         </>
                     )

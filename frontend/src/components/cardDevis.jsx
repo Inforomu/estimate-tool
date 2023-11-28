@@ -11,24 +11,29 @@ export default function CardDevis({ devis, onDelete }) {
     }
 
     return (
-        <div className="bg-white w-full h-full rounded-lg shadow-lg p-4 m-2">
-            <p><span className='paragraph-card-devis font-bold'>Relever terrain effectuer par:</span> {devis.user_email}</p>
-            <p><span className='paragraph-card-devis font-bold'>Pour le dossier client: </span> {devis.client_email}</p>
-            <div className='flex justify-between mt-2'>
-                <button 
-                    type="button"
-                    className="delete-button bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 px-4 py-2 rounded transition-all duration-300" 
-                    onClick={handleDeleteDevis}>
-                    Supprimer
-                </button>
+        <tr className="font-varela-scss bg-white border-b-4 hover:border-green-500 hover:text-black transition ease-in-out duration-300">
+            <th scope="row" className="mt-20 px-6 py-4 text-gray-900 whitespace-nowrap">
+            <span className='text-base'>{devis.client_email}</span>
+            </th>
+            <td className="px-6 py-4">
+                <span className='text-base'>{devis.user_email}</span>
+            </td>
+            <td className="px-6 py-4">
+                <span className='text-base'>{devis.client_ville}</span>
+            </td>
+            <td className="px-6 py-4">
+                <span className='text-base'>{devis.client_zipcode}</span>
+            </td>
+            <td className='flex flex-wrap md:flex-none p-1'>
+                
                 <Link
                     to={`/devis/${devis.id}`}
-                    className="bg-white border text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 px-4 py-2 rounded transition-all duration-300"
-                    > 
-                        Voir Détails
+                    className="bg-white border text-base text-green-500 shadow hover:bg-green-500 hover:text-white mx-3 p-3 rounded transition-all duration-300"
+                >
+                    Voir devis
                 </Link>
-            </div>
-        </div>
+            </td>
+        </tr>
     );
 }
 

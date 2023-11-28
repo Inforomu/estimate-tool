@@ -70,6 +70,8 @@ class DevisData {
         SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb, Devis.observation,
         Users.email AS user_email,
         Clients.email AS client_email,
+        Clients.ville AS client_ville,
+        Clients.zipcode AS client_zipcode,
         Devis_Image.id AS devis_image_id
         FROM Devis
         INNER JOIN Users ON Devis.author_id = Users.id
