@@ -2,6 +2,9 @@ const DevisData = require('../models/formDevis')
 const Image = require('../models/ImageDevis');
 const fs = require('fs');
 const path = require('path');
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
+const awsConfig = require('../config/s3AwsConfig');
 
 exports.uploadImg = async (req, res) => {
     if (!req.files || req.files.length === 0) {
@@ -11,26 +14,30 @@ exports.uploadImg = async (req, res) => {
     const imageFiles = [];
     try {
         for (const file of req.files) {
-            const imageFile = `${req.protocol}://${req.get('host')}/images/${file.filename}`;
-            imageFiles.push(imageFile);
-
-            const newImage = new Image(imageFile, formDataId);
+            if (!file.buffer || file.buffer.length === 0) {
+                return res.status(400).json({ error: 'Invalid file buffer' });
+            }
+            const imageKey = `images/${uuidv4()}-${file.originalname}`;
+            console.log(imageKey)
+            const params = {
+                Bucket: 'imagesestimate',
+                Key: imageKey,
+                Body: file.buffer,
+                ContentType: file.mimetype,
+            };
+            
+            const s3UploadResult = await new AWS.S3().upload(params).promise();
+            const imageUrl = s3UploadResult.Location;
+            const newImage = new Image(imageKey, formDataId);
             const imageIdResult = await newImage.save();
             const imageId = imageIdResult.insertId;
             const devisData = new DevisData({ id: formDataId });
+            imageFiles.push(imageUrl);
             console.log(imageId)
             if (imageId != undefined) {
                 await devisData.linkImageId(imageId);
             } else {
                 console.log('Ca plante id')
-            }
-
-            const filePath = path.join(__dirname, '..', 'images', file.filename);
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-                console.log("Save controller vers bdd image ok !");
-            } else {
-                console.log('Ca plante save controller !!')
             }
         }
 
@@ -45,16 +52,6 @@ exports.getAllImages = async (req, res) => {
     try {
         const allImages = await Image.getAllImages();
         res.json({ images: allImages });
-        // const stringData = JSON.stringify(allImages[0][0].image_data)
-        // const jsonData = JSON.parse(stringData)
-        
-        // let temp = ''
-        // jsonData.data.map(e=>{
-        //     temp += e.toString(16)
-        // })
-
-        // const buffer = Buffer.from(temp, 'hex')
-        // fs.writeFileSync('test.jpg', buffer, 'binary')
 
         allImages[0].map(e => {
             if (e.image_data !== null || e.image_data !== undefined) {
@@ -70,3 +67,34 @@ exports.getAllImages = async (req, res) => {
         res.status(500).json({ error: 'controller affichage img plante' });
     }
 };
+
+// exports.getImagesForDevis = async (req, res) => {
+//     try {
+//       const { id } = req.params;
+//       const imagesForDevis = await Image.getImagesForDevis(id);
+
+//       const signedUrls = await Promise.all(
+//         imagesForDevis.map(async (image) => {
+//           const imageKey = image.image_data;
+//           const signedUrl = await generateSignedUrl(imageKey);
+//           return signedUrl;
+//         })
+//       );
+  
+//       res.json({ images: signedUrls });
+//     } catch (error) {
+//       console.error('Erreur lors de la récupération des images pour le devis:', error);
+//       res.status(500).json({ error: 'Erreur lors de la récupération des images pour le devis' });
+//     }
+// };
+
+// const generateSignedUrl = async (imageKey) => {
+//     const params = {
+//         Bucket: 'imagesestimate',
+//         Key: imageKey,
+//         Expires: 60,
+//     };
+
+//     const signedUrl = await new AWS.S3().getSignedUrlPromise('getObject', params);
+//     return signedUrl;
+// };
