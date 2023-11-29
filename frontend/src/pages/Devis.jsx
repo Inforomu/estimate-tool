@@ -72,7 +72,7 @@ export default function Devis() {
                                 </h2>
                             </div>
                             <SearchBarDevis devis={devis} />
-                            <div classname='relative overflow-x-auto md: mx-10'>
+                            <div className='relative overflow-x-auto md: mx-10'>
                             <table className="w-full text-sm text-left rtl:text-right rounded shadow bg-green-600">
                                     <thead className="font-varela-scss text-xs text-white uppercase bg-green-600">
                                         <tr>

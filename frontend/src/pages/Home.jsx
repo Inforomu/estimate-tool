@@ -53,27 +53,27 @@ export default function Home() {
       {menuClients && (
         <ul className='ml-10 xs:ml-20'>
           <Link to={"/formclient"}>
-            <li style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i class="fa-solid fa-plus"></i></span>Créer Client</p></li>
+            <li style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i className="fa-solid fa-plus"></i></span>Créer Client</p></li>
           </Link>
           <Link to={"/clients"}>
-            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i class="fa-solid fa-table-list"></i></span>Voir Clients</p></li>
+            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i className="fa-solid fa-table-list"></i></span>Voir Clients</p></li>
           </Link>
         </ul>
       )}
       {menuDevis && (
         <ul className='ml-10 xs:ml-20'>
           <Link to={"/devis"}>
-            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i class="fa-solid fa-table-list"></i></span>Voir Devis</p></li>
+            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i className="fa-solid fa-table-list"></i></span>Voir Devis</p></li>
           </Link>
         </ul>
       )}
       {Cookies.get('role') === 'admin' && menuAdmin && (
         <ul className='ml-10 xs:ml-20'>
           <Link to={"/signup"}>
-            <li style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i class="fa-solid fa-plus"></i></span>Créer Utilisateur</p></li>
+            <li style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i className="fa-solid fa-plus"></i></span>Créer Utilisateur</p></li>
           </Link>
           <Link to={"/clients"}>
-            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i class="fa-solid fa-table-list"></i></span>Voir Clients</p></li>
+            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i className="fa-solid fa-table-list"></i></span>Voir Clients</p></li>
           </Link>
         </ul>
       )}

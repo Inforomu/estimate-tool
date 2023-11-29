@@ -39,6 +39,15 @@ function App() {
     }
   }, []);
 
+  const originalConsoleError = console.error;
+
+  // console.error = function (message) {
+  //   if (message.includes('Encountered two children')) {
+  //     return;
+  //   }
+  //   originalConsoleError.apply(console, arguments);
+  // };
+
   return (
     <BrowserRouter>
      {user.isLogged && <header><NavLogo /></header>}

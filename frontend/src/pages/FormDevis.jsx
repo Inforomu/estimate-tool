@@ -322,7 +322,7 @@ export default function FormDevis() {
                         </label>
                     </div>
                     <div className='relative z-0 w-full mb-6 mt-4 group'>
-                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 text-black">Vos observations: </label>
+                        <label for="message" className="block mb-2 text-sm font-medium text-gray-900 text-black">Vos observations: </label>
                         <textarea 
                             rows="4" 
                             className='block p-2.5 w-full text-sm text-gray-900 bg-white shadow-lg border-none rounded-lg border border-gray-300 resize-none focus:outline-green-600' 
