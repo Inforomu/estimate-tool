@@ -37,10 +37,7 @@ class Image {
 
     static getImagesForDevis(devisId) {
         const sql = `
-            SELECT Image.image_data
-            FROM Image
-            JOIN Devis_Image ON Image.id = Devis_Image.image_id
-            WHERE Devis_Image.devis_id = ?
+        SELECT Image.id, Image.image_data FROM Devis INNER JOIN Devis_Image ON Devis.id = Devis_Image.devis_id INNER JOIN Image ON Devis_Image.image_id = Image.id WHERE Devis.id = ?;
         `;
 
         try {

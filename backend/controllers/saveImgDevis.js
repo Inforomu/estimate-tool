@@ -68,33 +68,13 @@ exports.getAllImages = async (req, res) => {
     }
 };
 
-// exports.getImagesForDevis = async (req, res) => {
-//     try {
-//       const { id } = req.params;
-//       const imagesForDevis = await Image.getImagesForDevis(id);
-
-//       const signedUrls = await Promise.all(
-//         imagesForDevis.map(async (image) => {
-//           const imageKey = image.image_data;
-//           const signedUrl = await generateSignedUrl(imageKey);
-//           return signedUrl;
-//         })
-//       );
-  
-//       res.json({ images: signedUrls });
-//     } catch (error) {
-//       console.error('Erreur lors de la récupération des images pour le devis:', error);
-//       res.status(500).json({ error: 'Erreur lors de la récupération des images pour le devis' });
-//     }
-// };
-
-// const generateSignedUrl = async (imageKey) => {
-//     const params = {
-//         Bucket: 'imagesestimate',
-//         Key: imageKey,
-//         Expires: 60,
-//     };
-
-//     const signedUrl = await new AWS.S3().getSignedUrlPromise('getObject', params);
-//     return signedUrl;
-// };
+exports.getImagesForDevis = async (req, res) => {
+    try {
+        const devisId = req.params.devisId;
+        const devisImages = await Image.getImagesForDevis(devisId);
+        res.json({ images: devisImages });
+    } catch (error) {
+        console.error('Erreur lors de la récupération des images pour le devis', error);
+        res.status(500).json({ error: 'Erreur lors de la récupération des images pour le devis' });
+    }
+};
