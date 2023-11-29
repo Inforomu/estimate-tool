@@ -19,13 +19,13 @@ export default function cardDevisDetail({ devis, returnPath }) {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
-          setImgUrls(data.images);
+          console.log(data.images[0]);
+          setImgUrls(data.images[0]);
         })
         .catch((error) => {
           console.log('Ca plante api cdd');
         });
-  }, [devisId]);
+    }, [devisId]);
 
   const handlePopUp = () => {
     setPopUp(!popUp);
