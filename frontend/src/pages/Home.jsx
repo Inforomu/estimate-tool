@@ -9,6 +9,7 @@ export default function Home() {
   const [menuClients, setMenuClients] = useState(false);
   const [menuAdmin, setMenuAdmin] = useState(false);
 
+  const activeClass = 'active';
 
   const handleMenuDevis = () => {
     if (menuDevis === false) {
@@ -39,36 +40,44 @@ export default function Home() {
   };
 
   return (
-    <section className=''>
-      <h2 className='mb-3 text-2xl font-semibold'>Accueil</h2>
-      <div className='flex'>
-        <div className='flex flex-col'>
-          <button onClick={handleMenuClients} className=' bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Clients</button>
-          <button onClick={handleMenuDevis} className=' bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Devis</button>
-          {Cookies.get('role') === 'admin' && (
-            <button onClick={handleMenuAdmin} className=' bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Admin</button>
-          )}
-          <Logout />
-        </div>
-        {menuDevis && (
-          <div className='flex flex-col'>
-            <Link to={"/formdevis"} className='bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Créer un Devis</Link>
-            <Link to={"/devis"} className='bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Voir les Devis</Link>
-          </div>
+    <section className='flex ml-10'>
+      <ul>
+        <li className={menuClients ? activeClass : ''} onClick={handleMenuClients} style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i className="fa-solid fa-user"></i></span>Client</p></li>
+        <li className={menuDevis? activeClass : ''} onClick={handleMenuDevis} style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i className="fa-solid fa-folder"></i></span>Devis</p></li>
+        {Cookies.get('role') === 'admin' && (
+          <li className={menuAdmin ? activeClass : ''} onClick={handleMenuAdmin} style={{ "--i": 1, "--clr": "#c32aa3" }}><p><span><i className="fa-solid fa-screwdriver-wrench"></i></span>Admin</p></li>
         )}
-        {menuClients && (
-          <div className='flex flex-col'> 
-            <Link to={"/formclient"} className='bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Créer un Client</Link>
-            <Link to={"/clients"} className='bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Voir les Clients</Link>
-          </div>
-        )}
-        {Cookies.get('role') === 'admin' && menuAdmin && (
-        <div className='flex flex-col'>
-          <Link to={"/signup"} className='bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Créer un Utilisateur</Link>
-          <Link to={"/clients"} className='bg-green-500 m-1 px-5 py-3 rounded-lg shadow font-semibold text-center hover:bg-green-600'>Voir les Clients</Link>
-        </div>
+
+        <Logout />
+      </ul>
+      {menuClients && (
+        <ul className='ml-10 xs:ml-20'>
+          <Link to={"/formclient"}>
+            <li style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i class="fa-solid fa-plus"></i></span>Créer Client</p></li>
+          </Link>
+          <Link to={"/clients"}>
+            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i class="fa-solid fa-table-list"></i></span>Voir Clients</p></li>
+          </Link>
+        </ul>
       )}
-      </div>
+      {menuDevis && (
+        <ul className='ml-10 xs:ml-20'>
+          <Link to={"/devis"}>
+            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i class="fa-solid fa-table-list"></i></span>Voir Devis</p></li>
+          </Link>
+        </ul>
+      )}
+      {Cookies.get('role') === 'admin' && menuAdmin && (
+        <ul className='ml-10 xs:ml-20'>
+          <Link to={"/signup"}>
+            <li style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i class="fa-solid fa-plus"></i></span>Créer Utilisateur</p></li>
+          </Link>
+          <Link to={"/clients"}>
+            <li style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i class="fa-solid fa-table-list"></i></span>Voir Clients</p></li>
+          </Link>
+        </ul>
+      )}
     </section>
+
   )
 }
