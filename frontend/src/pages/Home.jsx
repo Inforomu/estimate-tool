@@ -40,7 +40,7 @@ export default function Home() {
   };
 
   return (
-    <section className='flex ml-10'>
+    <section className='flex ml-10 menu'>
       <ul>
         <li className={menuClients ? activeClass : ''} onClick={handleMenuClients} style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i className="fa-solid fa-user"></i></span>Client</p></li>
         <li className={menuDevis? activeClass : ''} onClick={handleMenuDevis} style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i className="fa-solid fa-folder"></i></span>Devis</p></li>
