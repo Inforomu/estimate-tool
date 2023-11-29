@@ -1,7 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export default function cardDevisDetail({ devis, returnPath }) {
+
+    const [popUp, setPopUp] = useState(false);
+    const [imgUrls, setImgUrls] = useState([]);
+    const devisId = devis.id;
+
+    useEffect(() => {
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
+        fetch(`${apiUrl}/api/uploadimg/getImagesForDevis/${devisId}`, {
+            method: 'GET',
+        })
+        .then((response) => {
+          if (!response.ok) {
+            console.log('Ca plante devis detail');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          setImgUrls(data.images);
+        })
+        .catch((error) => {
+          console.log('Ca plante api cdd');
+        });
+  }, [devisId]);
+
+  const handlePopUp = () => {
+    setPopUp(!popUp);
+  };
 
     // const handleDeleteDevis = () => {
     //     const confirmDelete = window.confirm('Voulez-vous supprimer ce devis ?');
@@ -58,7 +86,6 @@ export default function cardDevisDetail({ devis, returnPath }) {
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Numero de devis:</span> <span className='ml-1 text-green-500 font-bold'>{devis.id}</span></p>
                     
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Email du client concerner:</span> <span className='ml-1 text-green-500 font-bold'>{devis.client_ville}</span></p>
-
                     <div className='flex justify-between mt-2'>
                         <Link
                         to={returnPath}
@@ -70,9 +97,24 @@ export default function cardDevisDetail({ devis, returnPath }) {
                         <button 
                         type="button"
                         className="delete-button bg-white text-green-500 shadow-lg hover:bg-green-500 hover:text-white mt-2 px-4 py-2 m-1 rounded transition-all duration-300" 
+                        onClick={handlePopUp}
                         >
                             Voir les photos
                         </button>
+                    </div>
+                    <div className="popup">
+                        {popUp && imgUrls.length > 0 && (
+                            <div className="popup">
+                              {imgUrls.map((image, index) => (
+                                console.log(image.image_data),
+                                <img
+                                  key={index}
+                                  src={`https://imagesestimate.s3.eu-north-1.amazonaws.com/${image.image_data}`}
+                                  alt={`Image ${index}`}
+                                />
+                              ))}
+                            </div>
+                        )}
                     </div>
                 </div>
         </div>
