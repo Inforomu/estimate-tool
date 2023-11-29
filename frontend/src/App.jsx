@@ -12,7 +12,6 @@ import FormClient from './pages/FormClient';
 import Client from './pages/Client';
 import Devis from './pages/Devis';
 import ShowDevis from './pages/showDevis';
-import ShowImage from './pages/showImg';
 import ShowClient from './pages/ShowClient';
 import NavLogo from './components/NavLogo';
 import ShowClientDevis from './pages/showClientDevis';
@@ -58,7 +57,6 @@ function App() {
             <Route path="/clients/:id/devis" element={<ShowClientDevis />} />
             <Route path="/devis" element={<Devis />} />
             <Route path="/devis/:id" element={<ShowDevis />} />
-            <Route path="/image" element={<ShowImage />} />
           </>
         ) : (
           <>

@@ -97,7 +97,7 @@ export default function FormDevis() {
                         imageformData.append('image', pictures[i]);
                     }
                     imageformData.append('formDataId', formDataId);
-                    const imageResponse = await fetch(`${apiUrl}/api/uploadimg/uploadimg`, {
+                    const imageResponse = await fetch(`${apiUrl}/api/uploadimg`, {
                         method: 'POST',
                         body: imageformData,
                     });
