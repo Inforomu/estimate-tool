@@ -149,7 +149,7 @@ export default function FormDevis() {
                             placeholder='' 
                             onChange={(e) => setPowerYg(e.target.value)}
                             />
-                            <label htmlFor="power_yg" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Puissance souscrite (tarif jaune ou vert)
+                            <label htmlFor="power_yg" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Puissance souscrite (tarif jaune ou vert)
                             </label>
                     </div>
                     <select
@@ -211,7 +211,7 @@ export default function FormDevis() {
                             placeholder='' 
                             onChange={(e) => setGround_res(e.target.value)}
                         />
-                        <label htmlFor="ground_res" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Valeur de resistance de terre
+                        <label htmlFor="ground_res" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Valeur de resistance de terre
                         </label>
                     </div>
                     <select
@@ -235,7 +235,7 @@ export default function FormDevis() {
                             placeholder='' 
                             onChange={(e) => setBreaker(e.target.value)}
                         />
-                        <label htmlFor="breaker" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Calibre disjoncteur general
+                        <label htmlFor="breaker" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Calibre disjoncteur general
                         </label>
                     </div>
 
@@ -247,7 +247,7 @@ export default function FormDevis() {
                             placeholder='' 
                             onChange={(e) => setDistance(e.target.value)}
                         />
-                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Distance entre le TD et la ou les borne(s)
+                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Distance entre le TD et la ou les borne(s)
                         </label>
                     </div>
 
@@ -296,7 +296,7 @@ export default function FormDevis() {
                             placeholder='' 
                             onChange={(e) => setPower_charging(e.target.value)}
                         />
-                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Puissance de charge souhaiter
+                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Puissance de charge souhaiter
                         </label>
                     </div>
                     <div className='relative z-0 w-full mb-6 mt-4 group'>
@@ -307,7 +307,7 @@ export default function FormDevis() {
                             placeholder='' 
                             onChange={(e) => setCharge_points(e.target.value)}
                         />
-                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de points de recharges souhaiter
+                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de points de recharges souhaiter
                         </label>
                     </div>
                     <div className='relative z-0 w-full mb-6 mt-4 group'>
@@ -318,11 +318,11 @@ export default function FormDevis() {
                             placeholder='' 
                             onChange={(e) => setBox_nb(e.target.value)}
                         />
-                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de bornes de recharges souhaiter
+                        <label htmlFor="distance" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombres de bornes de recharges souhaiter
                         </label>
                     </div>
                     <div className='relative z-0 w-full mb-6 mt-4 group'>
-                        <label for="message" className="block mb-2 text-sm font-medium text-gray-900 text-black">Vos observations: </label>
+                        <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 ">Vos observations: </label>
                         <textarea 
                             rows="4" 
                             className='block p-2.5 w-full text-sm text-gray-900 bg-white shadow-lg border-none rounded-lg border border-gray-300 resize-none focus:outline-green-600' 

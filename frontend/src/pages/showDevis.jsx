@@ -26,7 +26,6 @@ export default function showDevis() {
             }
     
             const data = await response.json();
-            console.log(data);
             setDevis(data[0]);
             setShouldFetchData(false);
           } catch (error) {
