@@ -103,7 +103,23 @@ class DevisData {
         } catch (error) {
           throw error
         }
-      }
+    }
+
+    static async updateOneDevis(id, power_contract) {
+        let sql = `
+        UPDATE Devis
+        SET power_contract = ?,
+        WHERE id = ?;
+        `
+        const [values] = [power_contract];
+
+        try {
+            const result = await db.execute(sql, values);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
 
     async linkImageId(imageId) {
         const linkSql = `
