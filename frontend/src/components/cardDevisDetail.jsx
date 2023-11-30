@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import showClientDevis from '../pages/showClientDevis';
+import ModifyEdit from '../assets/modify.png';
+import CancelEdit from '../assets/annuler.png';
+import ClosePopUpPng from '../assets/close.png';
 
 export default function cardDevisDetail({ devis, returnPath }) {
 
     const [popUp, setPopUp] = useState(false);
     const [imgUrls, setImgUrls] = useState([]);
+    const [editData, setEditData] = useState({
+		power_contract: false,
+	});
+	const [power_contract, setPowerContract] = useState(devis.power_contract);
     const devisId = devis.id;
 
+
+	// Fetch affichage des elements du devis
     useEffect(() => {
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
         fetch(`${apiUrl}/api/uploadimg/getImagesForDevis/${devisId}`, {
@@ -27,9 +37,74 @@ export default function cardDevisDetail({ devis, returnPath }) {
         });
     }, [devisId]);
 
-  const handlePopUp = () => {
-    setPopUp(!popUp);
-  };
+	// Fetch sauvegarde des donnees modifier en BDD
+	const handleModifyDevis = async () => {
+		if(editData) {
+		const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+		const updatedDataDevis = {
+			id: devisId,
+			power_contract: power_contract,
+		}
+		
+		try {
+			const requestOptions = {
+				method: 'PUT',
+				headers: {
+					'Content-type': 'applications/json',
+				},
+				body: JSON.stringify(updatedDataDevis)
+			}
+
+			const response = await fetch(`${apiUrl}/api/uploadformdevis/${devisId}`, requestOptions);
+			if(response.ok) {
+					console.log('modification du devis ok')
+			} else {
+					console.log('Modification devis failed')
+			}
+		} catch(error) {
+			console.log('Erreur lors de la modification du devis')
+		}
+		}
+		setEditData(false);
+	};
+
+	// Handle passage mode edition dans un input
+	const handleEdit = () => {
+		setEditData((prevEditData) => ({
+		  ...prevEditData,
+		  power_contract: true,
+		}));
+	};
+
+	// Handle faisant appel a la fonction creer pour save les donnees modifier du devis en BDD
+	const handleSave = () => {
+		if(editData.power_contract) {
+			handleModifyDevis();
+		}
+		setEditData((prevEditData) => ({
+			...prevEditData,
+			power_contract: false,
+		}));
+
+	}
+
+	// Handle pour cancel le mode edit
+	const handleCancel = () => {
+		setEditData((prevEditData) => ({
+		  ...prevEditData,
+		  power_contract: false,
+		}));
+	  };
+
+	// Handle pop-up pour les images
+  	const handlePopUp = () => {
+  		setPopUp(!popUp);
+  	};
+
+	const onClosePopUp = () => {
+		setPopUp(!popUp);
+	}
 
     // const handleDeleteDevis = () => {
     //     const confirmDelete = window.confirm('Voulez-vous supprimer ce devis ?');
@@ -40,12 +115,31 @@ export default function cardDevisDetail({ devis, returnPath }) {
     // Ajouter delete ici et pas dans le cardDevis avec logique back pour les admins.
 
     return (
-        <div className='w-full h-full'>
+        <div className='h-full w-full'>
             <div>
-                <h2 className='paragraph-card-devis text-center text-xl text-green-500'>Details du relever terrain :</h2>
+                <h2 className='paragraph-card-devis text-center text-xl text-green-500'>Details du relever terrain pour :</h2>
             </div>
-                <div className='w-full p-6 paragraph-card-devis'>
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Puissance souscrite:</span> <span className='ml-1 text-green-500 font-bold'>{devis.power_contract}</span></p>
+            	<div className=' p-6 paragraph-card-devis'>
+                	<p className='bg-white shadow-lg p-2 m-1'>
+                  		<span className='underline'>Puissance souscrite:</span>
+                  		{editData.power_contract ? (
+                    		<input
+                      			type="text"
+                      			value={power_contract}
+                      			onChange={(e) => setPowerContract(e.target.value)}
+                    		/>
+                  		) : (
+                    		<span className='ml-1 text-green-500 font-bold'>{devis.power_contract}</span>
+                  		)}
+                  		<button className='' onClick={editData.power_contract ? handleSave : handleEdit}>
+						<img src={ModifyEdit} className='w-7 ml-10' alt="" srcset="" />
+						</button>
+						{editData.power_contract && (
+    					<button className='' onClick={handleCancel}>
+      						<img src={CancelEdit} className='w-7 ml-10' alt="" srcset="" />
+    					</button>
+  						)}
+                  </p>
 
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Puissance souscrite (tarif jaune ou vert):</span> <span className='ml-1 text-green-500 font-bold'>{devis.power_yg}</span></p>
 
@@ -85,7 +179,7 @@ export default function cardDevisDetail({ devis, returnPath }) {
 
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Numero de devis:</span> <span className='ml-1 text-green-500 font-bold'>{devis.id}</span></p>
                     
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Email du client concerner:</span> <span className='ml-1 text-green-500 font-bold'>{devis.client_ville}</span></p>
+                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Email du client concerner:</span> <span className='ml-1 text-green-500 font-bold'>{devis.client_email}</span></p>
                     <div className='flex justify-between mt-2'>
                         <Link
                         to={returnPath}
@@ -102,15 +196,19 @@ export default function cardDevisDetail({ devis, returnPath }) {
                             Voir les photos
                         </button>
                     </div>
-                    <div className="popup">
-                        {popUp && imgUrls.length > 0 && (
-                            <div className="popup">
+                    <div className={`popup ${popUp ? 'visible' : 'hidden'}`}>
+                        {imgUrls.length > 0 && (
+                            <div className="popup-content">
+							<span className='popup-close w-20' onClick={onClosePopUp}>
+								<img src={ClosePopUpPng} alt="" srcset="" />
+							</span>
                               {imgUrls.map((image, index) => (
                                 console.log(image.image_data),
                                 <img
-                                  key={index}
-                                  src={`https://imagesestimate.s3.eu-north-1.amazonaws.com/${image.image_data}`}
-                                  alt={`Image ${index}`}
+									className="popup-image"
+                                	key={index}
+                                  	src={`https://imagesestimate.s3.eu-north-1.amazonaws.com/${image.image_data}`}
+                                  	alt={`Image ${index}`}
                                 />
                               ))}
                             </div>
@@ -118,7 +216,6 @@ export default function cardDevisDetail({ devis, returnPath }) {
                     </div>
                 </div>
         </div>
-    );
+	);
 }
-
 // onClick={showImgDevis}

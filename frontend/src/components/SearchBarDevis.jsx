@@ -80,8 +80,8 @@ export default function SearchBarDevis( {devis} ) {
                             </tr>
                         </thead>
                         <tbody>
-                        {filteredDevis.map(devis=> (
-                            <CardDevis key={devis.id} devis={devis}/>
+                        {filteredDevis.map((devis, index) => (
+                            <CardDevis key={index} devis={devis}/>
                         ))}
                         </tbody>
                     </table>

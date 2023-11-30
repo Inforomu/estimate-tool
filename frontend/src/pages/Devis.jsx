@@ -91,8 +91,8 @@ export default function Devis() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {sortDevis.map((devis) => (
-                                            <CardDevis key={devis.id} devis={devis} />
+                                        {sortDevis.map((devis, index) => (
+                                            <CardDevis key={index} devis={devis} />
                                         ))}
                                     </tbody>
                                 </table>

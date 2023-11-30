@@ -5,6 +5,7 @@ const formDevisController = require('../controllers/formDevisController');
 
 router.get('/', auth, formDevisController.getAllFormData);
 router.get('/:id', auth, formDevisController.getOneDevis);
+router.put('/:id', auth, formDevisController.modifyOneDevis);
 router.post('/', auth, formDevisController.submitForm);
 
 module.exports = router;

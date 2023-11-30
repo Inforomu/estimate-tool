@@ -74,3 +74,15 @@ exports.getOneDevis = async (req, res, next) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 }
+
+exports.modifyOneDevis = async (req, res, next) => {
+    try {
+        const { id, power_contract } = req.body;
+        await Devis.updateOneDevis(id, power_contract)
+            .then(() => res.status(200).json({ message: 'Client modifié !' }))
+            .catch(error => res.status(400).json({ error }));
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
