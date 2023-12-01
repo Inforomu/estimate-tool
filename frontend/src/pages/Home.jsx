@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logout from '../components/Logout';
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
@@ -8,6 +8,8 @@ export default function Home() {
   const [menuDevis, setMenuDevis] = useState(false);
   const [menuClients, setMenuClients] = useState(false);
   const [menuAdmin, setMenuAdmin] = useState(false);
+  const [email, setEmail] = useState(null);
+
 
   const activeClass = 'active';
 
@@ -38,10 +40,20 @@ export default function Home() {
       setMenuAdmin(false);
     }
   };
+  useEffect(() => {
+    const emailFromCookie = Cookies.get('email');
+    if (emailFromCookie) {
+      setEmail(emailFromCookie);
+    }
+  }, []);
 
   return (
-    <section className='flex ml-10 menu'>
-      <ul>
+    <section className='flex flex-col menu'>
+      <div className='welcome'>
+        {email && <h2 className='text-center text-xl md:text-2xl'>Bonjours  {email}</h2>}
+      </div>
+      <div className='flex'>
+      <ul className='ml-10'>
         <li className={menuClients ? activeClass : ''} onClick={handleMenuClients} style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i className="fa-solid fa-user"></i></span>Client</p></li>
         <li className={menuDevis? activeClass : ''} onClick={handleMenuDevis} style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i className="fa-solid fa-folder"></i></span>Devis</p></li>
         {Cookies.get('role') === 'admin' && (
@@ -77,6 +89,7 @@ export default function Home() {
           </Link>
         </ul>
       )}
+      </div>
     </section>
 
   )

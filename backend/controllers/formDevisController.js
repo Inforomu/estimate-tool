@@ -60,7 +60,6 @@ exports.getOneDevis = async (req, res, next) => {
             .then((devis) => {
                 if (devis && devis[0] && devis[0].length > 0) {
                     res.status(200).json(devis[0]);
-                    console.log(devis)
                 } else {
                     res.status(404).json({ message: 'Client non trouvé' });
                 }

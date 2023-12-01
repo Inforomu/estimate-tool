@@ -128,14 +128,6 @@ export default function cardDevisDetail({ devis, returnPath }) {
 		setPopUp(!popUp);
 	}
 
-    // const handleDeleteDevis = () => {
-    //     const confirmDelete = window.confirm('Voulez-vous supprimer ce devis ?');
-    //     if (confirmDelete) {
-    //       onDelete(devis.id);
-    //     };
-    // }
-    // Ajouter delete ici et pas dans le cardDevis avec logique back pour les admins.
-
     return (
         <div className='h-full w-full'>
             <div>
@@ -224,10 +216,9 @@ export default function cardDevisDetail({ devis, returnPath }) {
                         {imgUrls.length > 0 && (
                             <div className="popup-content">
 							<span className='popup-close w-20' onClick={onClosePopUp}>
-								<img src={ClosePopUpPng} alt="" srcSet="" />
+								<img src={ClosePopUpPng} alt="" />
 							</span>
                               {imgUrls.map((image, index) => (
-                                console.log(image.image_data),
                                 <img
 									className="popup-image"
                                 	key={index}
@@ -242,4 +233,3 @@ export default function cardDevisDetail({ devis, returnPath }) {
         </div>
 	);
 }
-// onClick={showImgDevis}
