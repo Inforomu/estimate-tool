@@ -13,8 +13,6 @@ export default function Devis() {
     const [loading, setLoading] = useState(true);
     const [sortDevis, setSortDevis] = useState([]);
 
-
-
     useEffect(() => {
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
         const token = Cookies.get('token');
@@ -92,7 +90,11 @@ export default function Devis() {
                                     </thead>
                                     <tbody>
                                         {sortDevis.map((devis, index) => (
-                                            <CardDevis key={index} devis={devis} />
+                                            <CardDevis 
+                                                key={index} 
+                                                devis={devis}
+                                                
+                                            />
                                         ))}
                                     </tbody>
                                 </table>
