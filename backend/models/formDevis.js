@@ -108,10 +108,10 @@ class DevisData {
     static async updateOneDevis(id, power_contract) {
         let sql = `
         UPDATE Devis
-        SET power_contract = ?,
+        SET power_contract = ?
         WHERE id = ?;
         `
-        const [values] = [power_contract];
+        const values = [power_contract, id];
 
         try {
             const result = await db.execute(sql, values);

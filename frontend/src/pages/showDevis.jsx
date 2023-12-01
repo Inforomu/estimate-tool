@@ -37,6 +37,31 @@ export default function showDevis() {
         fetchData();
     
       }, [shouldFetchData, id]);
+
+    //   const refreshDataDevis = async () => {
+    //     try {
+    //       const token = Cookies.get('token');
+    //       const requestOptions = {
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //           Authorization: `Bearer ${token}`,
+    //         },
+    //       };
+  
+    //       const response = await fetch(`http://localhost:3000/api/uploadformdevis/${id}`, requestOptions);
+    //       if (!response.ok) {
+    //         throw new Error("La requête a échoué");
+    //       }
+  
+    //       const data = await response.json();
+    //       console.log(data);
+    //       setDevis(data[0]);
+    //       setShouldFetchData(false);
+    //     } catch (error) {
+    //       console.error("Erreur lors de la récupération du client :", error);
+    //     }
+    //     refreshDataDevis();
+    // };
     
 
   return (
@@ -49,3 +74,5 @@ export default function showDevis() {
     </div>
   )
 }
+
+// refreshDataDevis={refreshDataDevis}

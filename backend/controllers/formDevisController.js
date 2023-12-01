@@ -77,8 +77,10 @@ exports.getOneDevis = async (req, res, next) => {
 
 exports.modifyOneDevis = async (req, res, next) => {
     try {
-        const { id, power_contract } = req.body;
-        await Devis.updateOneDevis(id, power_contract)
+        const id = req.params.id;
+        const { power_contract } = req.body;
+
+        await FormData.updateOneDevis(id, power_contract)
             .then(() => res.status(200).json({ message: 'Client modifié !' }))
             .catch(error => res.status(400).json({ error }));
     } catch (error) {

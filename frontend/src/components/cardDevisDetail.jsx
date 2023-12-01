@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import showClientDevis from '../pages/showClientDevis';
+import Cookies from 'js-cookie';
 import ModifyEdit from '../assets/modify.png';
 import CancelEdit from '../assets/annuler.png';
 import ClosePopUpPng from '../assets/close.png';
@@ -11,6 +11,24 @@ export default function cardDevisDetail({ devis, returnPath }) {
     const [imgUrls, setImgUrls] = useState([]);
     const [editData, setEditData] = useState({
 		power_contract: false,
+		power_yg: false,
+		contract: false,
+		electric_controller: false,
+		telereport: false,
+		wifi: false,
+        mobile: false,
+        ground_res: false,
+        neutral_system: false,
+        breaker: false,
+        distance: false,
+        secure: false,
+        type_e: false,
+        dispo_td: false,
+        power_charging: false,
+        charge_points: false,
+        box_nb: false,
+        observation: false,
+
 	});
 	const [power_contract, setPowerContract] = useState(devis.power_contract);
     const devisId = devis.id;
@@ -41,24 +59,28 @@ export default function cardDevisDetail({ devis, returnPath }) {
 	const handleModifyDevis = async () => {
 		if(editData) {
 		const apiUrl = import.meta.env.VITE_API_BASE_URL;
-
+		const token = Cookies.get('token');
+		console.log('Valeur actuel de power_contract:', power_contract);
 		const updatedDataDevis = {
 			id: devisId,
 			power_contract: power_contract,
 		}
-		
+		console.log(updatedDataDevis)
 		try {
 			const requestOptions = {
 				method: 'PUT',
 				headers: {
-					'Content-type': 'applications/json',
+					Authorization: `Bearer ${token}`,
+					'Content-type': 'application/json',
 				},
 				body: JSON.stringify(updatedDataDevis)
 			}
 
 			const response = await fetch(`${apiUrl}/api/uploadformdevis/${devisId}`, requestOptions);
 			if(response.ok) {
+					setPowerContract(power_contract);
 					console.log('modification du devis ok')
+					console.log('Nouvelle valeur de power_contract:', power_contract);
 			} else {
 					console.log('Modification devis failed')
 			}
@@ -95,7 +117,7 @@ export default function cardDevisDetail({ devis, returnPath }) {
 		  ...prevEditData,
 		  power_contract: false,
 		}));
-	  };
+	};
 
 	// Handle pop-up pour les images
   	const handlePopUp = () => {
@@ -132,16 +154,18 @@ export default function cardDevisDetail({ devis, returnPath }) {
                     		<span className='ml-1 text-green-500 font-bold'>{devis.power_contract}</span>
                   		)}
                   		<button className='' onClick={editData.power_contract ? handleSave : handleEdit}>
-						<img src={ModifyEdit} className='w-7 ml-10' alt="" srcset="" />
+						<img src={ModifyEdit} className='w-7 ml-72' alt="" />
 						</button>
 						{editData.power_contract && (
     					<button className='' onClick={handleCancel}>
-      						<img src={CancelEdit} className='w-7 ml-10' alt="" srcset="" />
+      						<img src={CancelEdit} className='w-7 ml-10' alt="" />
     					</button>
   						)}
                   </p>
 
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Puissance souscrite (tarif jaune ou vert):</span> <span className='ml-1 text-green-500 font-bold'>{devis.power_yg}</span></p>
+                    <p className='bg-white shadow-lg p-2 m-1'>
+						<span className='underline'>Puissance souscrite (tarif jaune ou vert):</span>
+						 <span className='ml-1 text-green-500 font-bold'>{devis.power_yg}</span></p>
 
                     <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Contrat:</span> <span className='ml-1 text-green-500 font-bold'>{devis.contract}</span></p>
 
@@ -200,7 +224,7 @@ export default function cardDevisDetail({ devis, returnPath }) {
                         {imgUrls.length > 0 && (
                             <div className="popup-content">
 							<span className='popup-close w-20' onClick={onClosePopUp}>
-								<img src={ClosePopUpPng} alt="" srcset="" />
+								<img src={ClosePopUpPng} alt="" srcSet="" />
 							</span>
                               {imgUrls.map((image, index) => (
                                 console.log(image.image_data),
