@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie';
 import {React, useState} from 'react';
-import backArrow from '../assets/backArrow.png';
 import trashImg from '../assets/supprimer.png';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -323,11 +322,7 @@ export default function FormDevis() {
                         </label>
                     </div>
                     <div className='relative z-0 w-full mb-6 mt-4 group'>
-<<<<<<< HEAD
-                        <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 text-black">Vos observations: </label>
-=======
                         <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 ">Vos observations: </label>
->>>>>>> 00c96e0a4c317b523ac763cb9adfcee3323c6571
                         <textarea 
                             rows="4" 
                             className='block p-2.5 w-full text-sm text-gray-900 bg-white shadow-lg border-none rounded-lg border border-gray-300 resize-none focus:outline-green-600' 
@@ -337,7 +332,6 @@ export default function FormDevis() {
                         >
 
                         </textarea>
-                        
                     </div>
                     <div className="bg-white shadow-xl rounded-lg">
                         <input
