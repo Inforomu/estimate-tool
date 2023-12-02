@@ -7,32 +7,12 @@ import ClosePopUpPng from '../assets/close.png';
 
 export default function cardDevisDetail({ devis, returnPath }) {
 
+	const [denominations, setDenominations] = useState(null)
+	const [tmpDenominations, setTmpDenominations] = useState(null)
     const [popUp, setPopUp] = useState(false);
     const [imgUrls, setImgUrls] = useState([]);
-    const [editData, setEditData] = useState({
-		power_contract: false,
-		power_yg: false,
-		contract: false,
-		electric_controller: false,
-		telereport: false,
-		wifi: false,
-        mobile: false,
-        ground_res: false,
-        neutral_system: false,
-        breaker: false,
-        distance: false,
-        secure: false,
-        type_e: false,
-        dispo_td: false,
-        power_charging: false,
-        charge_points: false,
-        box_nb: false,
-        observation: false,
-
-	});
-	const [power_contract, setPowerContract] = useState(devis.power_contract);
+    const [editData, setEditData] = useState(null);
     const devisId = devis.id;
-
 
 	// Fetch affichage des elements du devis
     useEffect(() => {
@@ -47,7 +27,6 @@ export default function cardDevisDetail({ devis, returnPath }) {
           return response.json();
         })
         .then((data) => {
-          console.log(data.images[0]);
           setImgUrls(data.images[0]);
         })
         .catch((error) => {
@@ -55,17 +34,51 @@ export default function cardDevisDetail({ devis, returnPath }) {
         });
     }, [devisId]);
 
+	// Use effect qui recupere les donnees de devis et les stocks dans un object JSON
+	useEffect(() => {
+		if (devis){
+			setDenominations(
+				[
+					{"title":"Puissance souscrite(Tarif bleu):", "header":'power_contract', "data":devis.power_contract},
+					{"title":"Puissance souscrite(Tarif jaune ou vert):", "header":'power_yg', "data":devis.power_yg},
+					{"title":"Contrat:", "header":'contract', "data":devis.contract},
+					{"title":"Compteur electronique:", "header":'electric_controller', "data":devis.electric_controller},
+					{"title":"Connexion telereport:", "header":'telereport', "data":devis.telereport},
+					{"title":"Couverture Wifi:", "header":'wifi', "data":devis.wifi},
+					{"title":"Couverture Mobile:", "header":'mobile', "data":devis.mobile},
+					{"title":"Systeme de resistance à la terre:", "header":'ground_res', "data":devis.ground_res},
+					{"title":"Systeme de neutre:", "header":'neutral_system', "data":devis.neutral_system},
+					{"title":"Calibre disjoncteur générale:", "header":'breaker', "data":devis.breaker},
+					{"title":"Distance entre le TD et la ou les bornes:", "header":'distance', "data":devis.distance},
+					{"title":"Type de securite de charge:", "header":'secure', "data":devis.secure},
+					{"title":"Besoin d'une prise type E:", "header":'type_e', "data":devis.type_e},
+					{"title":"Disponibilité TD:", "header":'dispo_td', "data":devis.dispo_td},
+					{"title":"Puissance de charge souhaitée:", "header":'power_charging', "data":devis.power_charging},
+					{"title":"Nombres de points de charges:", "header":'charge_points', "data":devis.charge_points},
+					{"title":"Nombres de bornes:", "header":'box_nb', "data":devis.box_nb},
+					{"title":"Observations pour ce client:", "header":'observation', "data":devis.observation},
+					{"title":"Numero du devis:", "header":'id', "data": devisId},
+				]
+			)
+			const states = new Array(Object.keys(devis).length).fill(false) // Rempli les elements du tab avec False
+			setEditData(states);
+		}
+	}, [devis])
+
+	// Use effect setDenomination
+	useEffect(() => {
+		if (denominations) {
+			setTmpDenominations(denominations);
+		}
+
+	}, [denominations])
+
 	// Fetch sauvegarde des donnees modifier en BDD
-	const handleModifyDevis = async () => {
-		if(editData) {
+	const handleModifyDevis = async (data) => {
 		const apiUrl = import.meta.env.VITE_API_BASE_URL;
 		const token = Cookies.get('token');
-		console.log('Valeur actuel de power_contract:', power_contract);
-		const updatedDataDevis = {
-			id: devisId,
-			power_contract: power_contract,
-		}
-		console.log(updatedDataDevis)
+		// console.log(data);
+
 		try {
 			const requestOptions = {
 				method: 'PUT',
@@ -73,50 +86,62 @@ export default function cardDevisDetail({ devis, returnPath }) {
 					Authorization: `Bearer ${token}`,
 					'Content-type': 'application/json',
 				},
-				body: JSON.stringify(updatedDataDevis)
+				body: JSON.stringify(data)
 			}
+			console.log(data)
 
 			const response = await fetch(`${apiUrl}/api/uploadformdevis/${devisId}`, requestOptions);
 			if(response.ok) {
-					setPowerContract(power_contract);
 					console.log('modification du devis ok')
-					console.log('Nouvelle valeur de power_contract:', power_contract);
 			} else {
 					console.log('Modification devis failed')
 			}
 		} catch(error) {
 			console.log('Erreur lors de la modification du devis')
 		}
-		}
-		setEditData(false);
 	};
 
-	// Handle passage mode edition dans un input
-	const handleEdit = () => {
-		setEditData((prevEditData) => ({
-		  ...prevEditData,
-		  power_contract: true,
-		}));
+	// Handle passage mode edition dans un input, edite un input en fonction de l'index
+	const handleEdit = (index) => {
+		setEditData((prevEditData) => {
+		  const tmp = [...prevEditData]
+		  tmp[index] = true
+		  return tmp
+		});
 	};
+
+	// Handle changements des donnees tmpDenomition avec la value passer en param.
+	const handleChangeData = (index, e) => {
+		setTmpDenominations((prev) => {
+			const tmp = [...prev]
+			tmp[index].data = e.value
+			return tmp
+		});
+	}
 
 	// Handle faisant appel a la fonction creer pour save les donnees modifier du devis en BDD
-	const handleSave = () => {
-		if(editData.power_contract) {
-			handleModifyDevis();
+	const handleSave = (index) => {
+		setDenominations(tmpDenominations)
+		const data = {
+			id: devisId,
+			[tmpDenominations[index]['header']]: tmpDenominations[index]['data'],
 		}
-		setEditData((prevEditData) => ({
-			...prevEditData,
-			power_contract: false,
-		}));
-
+		handleModifyDevis(data);
+		console.log(data)
+		setEditData((prevEditData) => {
+			const tmp = [...prevEditData]
+			tmp[index] = false
+			return tmp
+		});
 	}
 
 	// Handle pour cancel le mode edit
-	const handleCancel = () => {
-		setEditData((prevEditData) => ({
-		  ...prevEditData,
-		  power_contract: false,
-		}));
+	const handleCancel = (index) => {
+		setEditData((prevEditData) => {
+			const tmp = [...prevEditData]
+			tmp[index] = false
+			return tmp
+		});
 	};
 
 	// Handle pop-up pour les images
@@ -139,71 +164,38 @@ export default function cardDevisDetail({ devis, returnPath }) {
     return (
         <div className='h-full w-full'>
             <div>
-                <h2 className='paragraph-card-devis text-center text-xl text-green-500'>Details du relever terrain pour :</h2>
+                <h2 className='paragraph-card-devis text-center text-xl text-green-500'>Details du relever terrain pour : {devis.client_email}</h2>
             </div>
-            	<div className=' p-6 paragraph-card-devis'>
-                	<p className='bg-white shadow-lg p-2 m-1'>
-                  		<span className='underline'>Puissance souscrite:</span>
-                  		{editData.power_contract ? (
-                    		<input
-                      			type="text"
-                      			value={power_contract}
-                      			onChange={(e) => setPowerContract(e.target.value)}
-                    		/>
-                  		) : (
-                    		<span className='ml-1 text-green-500 font-bold'>{devis.power_contract}</span>
-                  		)}
-                  		<button className='' onClick={editData.power_contract ? handleSave : handleEdit}>
-						<img src={ModifyEdit} className='w-7 ml-72' alt="" />
-						</button>
-						{editData.power_contract && (
-    					<button className='' onClick={handleCancel}>
-      						<img src={CancelEdit} className='w-7 ml-10' alt="" />
-    					</button>
-  						)}
-                  </p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'>
-						<span className='underline'>Puissance souscrite (tarif jaune ou vert):</span>
-						 <span className='ml-1 text-green-500 font-bold'>{devis.power_yg}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Contrat:</span> <span className='ml-1 text-green-500 font-bold'>{devis.contract}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Compteur electronique:</span> <span className='ml-1 text-green-500 font-bold'>{devis.electric_controller}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Connexion telereport:</span> <span className='ml-1 text-green-500 font-bold'>{devis.telereport}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Couverture Wifi:</span> <span className='ml-1 text-green-500 font-bold'>{devis.wifi}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Couverture Mobile:</span> <span className='ml-1 text-green-500 font-bold'>{devis.mobile}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Systeme de resistance a la terre:</span> <span className='ml-1 text-green-500 font-bold'>{devis.ground_res}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Systeme de neutre:</span> <span className='ml-1 text-green-500 font-bold'>{devis.neutral_system}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Calibre disjoncteur generale:</span> <span className='ml-1 text-green-500 font-bold'>{devis.breaker}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Distance entre le TD et la ou les bornes:</span> <span className='ml-1 text-green-500 font-bold'>{devis.distance}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Type de securite de charge:</span> <span className='ml-1 text-green-500 font-bold'>{devis.secure}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Besoin d'une prise type E:</span> <span className='ml-1 text-green-500 font-bold'>{devis.type_e}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Disponibilite TD:</span> <span className='ml-1 text-green-500 font-bold'>{devis.dispo_td}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Puissance de charge souhaiter:</span> <span className='ml-1 text-green-500 font-bold'>{devis.power_charging}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Nombres de points de charges:</span> <span className='ml-1 text-green-500 font-bold'>{devis.charge_points}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Nombres de bornes:</span> <span className='ml-1 text-green-500 font-bold'>{devis.box_nb}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Observations pour ce client:</span> <span className='ml-1 text-green-500 font-bold'>{devis.observation}</span></p>
-                                    
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Relever terrain effectuer par:</span> <span className='ml-1 text-green-500 font-bold'>{devis.user_email}</span></p>
-
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Numero de devis:</span> <span className='ml-1 text-green-500 font-bold'>{devis.id}</span></p>
-                    
-                    <p className='bg-white shadow-lg p-2 m-1'><span className='underline'>Email du client concerner:</span> <span className='ml-1 text-green-500 font-bold'>{devis.client_email}</span></p>
+            	<div className='p-6 paragraph-card-devis'>
+					{denominations && denominations.map((data_devis, index)=>{
+						return (
+							<div className=''>
+							<p className='bg-white shadow-lg p-2 m-1 w-full flex items-center'>
+								<span className='underline'>{data_devis.title}</span> 
+								<span className='ml-1 text-green-600 font-bold'>
+								{editData[index] === false && data_devis.data}
+								{editData[index] === true && (
+								<input
+									type="text"
+									className='focus:outline-green-600'
+									onChange={(e) => handleChangeData(index, e.target)}
+								/>
+								)}
+								</span>
+        							<button className='ml-auto' onClick={() => editData[index] === true ? handleSave(index) : handleEdit(index)}>
+            							<img src={ModifyEdit} className='w-7 flex-auto w-7' alt="" />
+        							</button>
+        							{editData[index] === true && (
+            							<>
+                							<button className='ml-2' onClick={() => handleCancel(index)}>
+                    							<img src={CancelEdit} className='w-7' alt="" />
+                							</button>
+           								</>
+        							)}
+    						</p>
+							</div>
+						)
+					})}
                     <div className='flex justify-between mt-2'>
                         <Link
                         to={returnPath}
@@ -221,21 +213,29 @@ export default function cardDevisDetail({ devis, returnPath }) {
                         </button>
                     </div>
                     <div className={`popup ${popUp ? 'visible' : 'hidden'}`}>
-                        {imgUrls.length > 0 && (
+                        {imgUrls.length > 0 ? (
                             <div className="popup-content">
 							<span className='popup-close w-20' onClick={onClosePopUp}>
 								<img src={ClosePopUpPng} alt="" srcSet="" />
 							</span>
-                              {imgUrls.map((image, index) => (
-                                console.log(image.image_data),
-                                <img
-									className="popup-image"
-                                	key={index}
-                                  	src={`https://imagesestimate.s3.eu-north-1.amazonaws.com/${image.image_data}`}
-                                  	alt={`Image ${index}`}
-                                />
-                              ))}
+                            {imgUrls.map((image, index) => (
+                              <img
+								className="popup-image"
+                              	key={index}
+                                src={`https://imagesestimate.s3.eu-north-1.amazonaws.com/${image.image_data}`}
+                                alt={`Image ${index}`}
+                              />
+                            ))}
                             </div>
+						) : (
+							<div className="popup-content">
+								<span className='popup-close w-20' onClick={onClosePopUp}>
+									<img src={ClosePopUpPng} alt="" srcSet="" />
+								</span>
+								<div className='bg-white text-2xl'>
+									<p className='py-6 ml-4 mr-4'>Aucune photo a afficher pour ce devis.</p>
+								</div>
+							</div>
                         )}
                     </div>
                 </div>

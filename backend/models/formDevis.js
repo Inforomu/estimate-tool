@@ -105,14 +105,18 @@ class DevisData {
         }
     }
 
-    static async updateOneDevis(id, power_contract) {
+    static async updateOneDevis(id, updatedFields) {
+
+        const fieldNames = Object.keys(updatedFields);
+
+        const setUpdatedFields = fieldNames.map((fieldName) => `${fieldName} = ?`).join(', ');
         let sql = `
         UPDATE Devis
-        SET power_contract = ?
+        SET ${setUpdatedFields}
         WHERE id = ?;
         `
-        const values = [power_contract, id];
-
+        const values = fieldNames.map((fieldName) => updatedFields[fieldName]);
+        values.push(id);
         try {
             const result = await db.execute(sql, values);
             return result;

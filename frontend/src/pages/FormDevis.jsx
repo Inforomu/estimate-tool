@@ -121,7 +121,7 @@ export default function FormDevis() {
     // Voir mettre back arrow dans l'app et mettre une maison a la place d'une fleche
     return (
         <div className='w-full m-4'>
-            <h2 className='w-full text-center text-3xl font-bold underline py-2'>Relever terrain :</h2>
+            <h2 className='title-signin w-full text-center text-3xl font-bold py-2 mt-4 mb-6'>Relevé d'informations terrain :</h2>
             <form className='test sm:mx-8 md:mx-16 lg:mx-48 bg-white shadow-xl p-6 rounded-xl' encType="multipart/form-data" onSubmit={handleSubmit}>
                 <div className="input-data">
                     <select
@@ -133,6 +133,7 @@ export default function FormDevis() {
                         <option value="Bleu-6-KvA">Bleu-monophase-6 KvA</option>
                         <option value="Bleu-9-KvA">Bleu-monophase-9 KvA</option>
                         <option value="Bleu-12-KvA">Bleu-monophase-12 KvA</option>
+                        <option value="Bleu-12-KvA">Bleu-monophase-15 KvA</option>
                         <option value="Bleu-Triphase-15 KvA">Bleu-Triphase-15 KvA</option>
                         <option value="Bleu-Triphase-18 KvA">Bleu-Triphase-18 KvA</option>
                         <option value="Bleu-Triphase-24 KvA">Bleu-Triphase-24 KvA</option>
@@ -322,7 +323,7 @@ export default function FormDevis() {
                         </label>
                     </div>
                     <div className='relative z-0 w-full mb-6 mt-4 group'>
-                        <label for="message" className="block mb-2 text-sm font-medium text-gray-900 text-black">Vos observations: </label>
+                        <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 text-black">Vos observations: </label>
                         <textarea 
                             rows="4" 
                             className='block p-2.5 w-full text-sm text-gray-900 bg-white shadow-lg border-none rounded-lg border border-gray-300 resize-none focus:outline-green-600' 
