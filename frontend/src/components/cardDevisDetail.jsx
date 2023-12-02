@@ -153,14 +153,6 @@ export default function cardDevisDetail({ devis, returnPath }) {
 		setPopUp(!popUp);
 	}
 
-    // const handleDeleteDevis = () => {
-    //     const confirmDelete = window.confirm('Voulez-vous supprimer ce devis ?');
-    //     if (confirmDelete) {
-    //       onDelete(devis.id);
-    //     };
-    // }
-    // Ajouter delete ici et pas dans le cardDevis avec logique back pour les admins.
-
     return (
         <div className='h-full w-full'>
             <div>
@@ -216,30 +208,30 @@ export default function cardDevisDetail({ devis, returnPath }) {
                         {imgUrls.length > 0 ? (
                             <div className="popup-content">
 							<span className='popup-close w-20' onClick={onClosePopUp}>
-								<img src={ClosePopUpPng} alt="" srcSet="" />
+								<img src={ClosePopUpPng} alt="" />
 							</span>
-                            {imgUrls.map((image, index) => (
-                              <img
-								className="popup-image"
-                              	key={index}
-                                src={`https://imagesestimate.s3.eu-north-1.amazonaws.com/${image.image_data}`}
-                                alt={`Image ${index}`}
-                              />
-                            ))}
+                              {imgUrls.map((image, index) => (
+                                console.log(image.image_data),
+                                <img
+									className="popup-image"
+                                	key={index}
+                                  	src={`https://imagesestimate.s3.eu-north-1.amazonaws.com/${image.image_data}`}
+                                  	alt={`Image ${index}`}
+                                />
+                              ))}
                             </div>
-						) : (
-							<div className="popup-content">
-								<span className='popup-close w-20' onClick={onClosePopUp}>
-									<img src={ClosePopUpPng} alt="" srcSet="" />
-								</span>
-								<div className='bg-white text-2xl'>
-									<p className='py-6 ml-4 mr-4'>Aucune photo a afficher pour ce devis.</p>
+							) : (
+								<div className="popup-content">
+									<span className='popup-close w-20' onClick={onClosePopUp}>
+										<img src={ClosePopUpPng} alt="" srcSet="" />
+									</span>
+									<div className='bg-white text-2xl'>
+										<p className='py-6 ml-4 mr-4'>Aucune photo a afficher pour ce devis.</p>
+									</div>
 								</div>
-							</div>
-                        )}
+							)}
                     </div>
                 </div>
         </div>
 	);
 }
-// onClick={showImgDevis}

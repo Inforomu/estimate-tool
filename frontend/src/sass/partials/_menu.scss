@@ -138,10 +138,16 @@ $shadowOffset: -150px 150px 30px;
   }
 }
 
-
 .menu ul:nth-child(2),
 .menu ul:nth-child(3) {
   li:last-child::after {
     box-shadow: none;
   }
+}
+
+.welcome {
+  margin-bottom: 100px;
+  color: #333333;
+  text-shadow: 2px 2px 0px #FFFFFF, 4px 3px 0px rgba(0,0,0,0.15);
+  font-weight: 500;
 }
