@@ -175,7 +175,7 @@ export default function cardDevisDetail({ devis, returnPath }) {
 								)}
 								</span>
         							<button className='ml-auto' onClick={() => editData[index] === true ? handleSave(index) : handleEdit(index)}>
-            							<img src={ModifyEdit} className='w-7 flex-auto w-7' alt="" />
+            							<img src={ModifyEdit} className='flex-auto w-7' alt="" />
         							</button>
         							{editData[index] === true && (
             							<>

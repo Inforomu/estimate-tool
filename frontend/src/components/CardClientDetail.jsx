@@ -34,7 +34,7 @@ export default function CardClientDetail({ client }) {
                   scope="row"
                   className="w-1/4 px-6 py-4 text-gray-900 whitespace-nowrap text-right"
                 >
-                  {key === "created_at" ? "Crée le" : key}
+                  {key === "created_at" ? "Crée le" : key} :
                 </th>
                 <td className="w-3/4 px-5 py-3">
                   <span className="text-base">

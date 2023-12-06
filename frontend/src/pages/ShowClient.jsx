@@ -46,6 +46,7 @@ export default function showClient() {
     const fetchData = async () => {
       try {
         const token = Cookies.get('token');
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
         const requestOptions = {
           headers: {
             'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ export default function showClient() {
           },
         };
 
-        const response = await fetch(`http://localhost:3000/api/client/${id}`, requestOptions);
+        const response = await fetch(`${apiUrl}/api/client/${id}`, requestOptions);
         if (!response.ok) {
           throw new Error("La requête a échoué");
         }
