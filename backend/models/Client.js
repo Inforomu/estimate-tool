@@ -43,10 +43,13 @@ class Client {
     ];
 
     try {
-      const result = await db.execute(sql, values)
-      return result
+      const connection = await db.execute();
+      const result = await connection.execute(sql, values);
+      return result[0];
     } catch (error) {
-      throw error
+      throw error 
+    } finally {
+      db.closeConnection();
     }
   }
 
@@ -59,10 +62,13 @@ class Client {
       `;
 
     try {
-      const [result] = await db.execute(sql);
-      return result;
+      const connection = await db.execute();
+      const result = await connection.execute(sql);
+      return result[0];
     } catch (error) {
       throw error
+    } finally {
+      db.closeConnection();
     }
   }
 
@@ -76,11 +82,14 @@ class Client {
       `;
 
     try {
-      const [result] = await db.execute(sql, [id]);
-      console.log(result)
-      return result;
+      const connection = await db.execute();
+      const result = await connection.execute(sql, [id]);
+      console.log(result);
+      return result[0];
     } catch (error) {
       throw error
+    } finally {
+      db.closeConnection();
     }
   }
 
@@ -120,13 +129,15 @@ class Client {
     const values = [  prenom, nom, email, telephone,adresse, zipcode, ville, description, id ];
 
     try {
-      const result = await db.execute(sql, values);
-      return result;
+      const connection = await db.execute();
+      const result = await connection.execute(sql, values);
+      return result[0];
     } catch (error) {
       throw error;
+    } finally {
+      db.closeConnection();
     }
   }
-
 }
 
 module.exports = Client;

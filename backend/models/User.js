@@ -18,10 +18,8 @@ class User {
         try {
             const connection = await db.execute();
             const result = await connection.execute(sql, values);
-            console.log(result);
             return result[0];
         } catch (error) {
-          console.log(error);
           throw error;
         } finally {
           db.closeConnection();
