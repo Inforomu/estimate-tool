@@ -9,43 +9,56 @@ class User {
 
     async save() {
         const sql = `
-            INSERT INTO Users (email, password, role)
-            VALUES (?, ?, ?)
+          INSERT INTO Users (email, password, role)
+          VALUES (?, ?, ?)
         `;
-
+    
         const values = [this.email, this.password, this.role];
-
+    
         try {
-            const [result] = await db.execute(sql, values);
-            return result;
+            const connection = await db.execute();
+            const result = await connection.execute(sql, values);
+            return result[0];
         } catch (error) {
-            throw error;
+          throw error;
+        } finally {
+          db.closeConnection();
         }
     }
 
     static async findByEmail(email) {
         const sql = `
-            SELECT * FROM Users WHERE email = ?
+            SELECT * FROM Users WHERE email = ?;
         `;
     
         try {
-            const result = await db.execute(sql, [email]);
+            const connection = await db.execute();
+            const result = await connection.execute(sql, [email]);
+            console.log(result);
             return result;
         } catch (error) {
+            console.log(error);
             throw error;
+        } finally {
+            db.closeConnection();
         }
     }
 
     static async findById(id) {
         const sql = `
-            SELECT * FROM Users WHERE id = ?
+            SELECT * FROM Users WHERE id = ?;
         `;
     
         try {
-            const result = await db.execute(sql, [id]);
+            const connection = await db.execute();
+            const result = await connection.execute(sql, [id]);
+            console.log(result);
             return result;
         } catch (error) {
-            throw error;
+          console.log(error);
+          throw error;
+        } finally {
+          db.closeConnection();
         }
     }
 }

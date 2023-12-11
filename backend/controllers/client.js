@@ -38,7 +38,6 @@ exports.getOneClient = async (req, res, next) => {
                 } else {
                     res.status(404).json({ message: 'Client non trouvé' });
                 }
-                console.log(client)
             })
             .catch((error) => {
                 console.error("Error when retrieving the item:", error);
