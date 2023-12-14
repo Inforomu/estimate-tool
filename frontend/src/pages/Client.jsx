@@ -66,7 +66,7 @@ export default function Client() {
                             <div className="relative overflow-x-auto  md:mx-10">
                                 <table className="w-full text-sm md:text-left rtl:text-right rounded shadow bg-green-600 text-center">
                                     <thead className="font-varela-scss text-xs text-white uppercase bg-green-600">
-                                        <tr>
+                                        <tr className='text-center'>
                                             <th scope="col" className="md:px-6 py-3">
                                                 Nom
                                             </th>
