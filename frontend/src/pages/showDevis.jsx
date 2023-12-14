@@ -13,6 +13,7 @@ export default function showDevis() {
         const fetchData = async () => {
           try {
             const token = Cookies.get('token');
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
             const requestOptions = {
               headers: {
                 'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ export default function showDevis() {
               },
             };
     
-            const response = await fetch(`http://localhost:3000/api/uploadformdevis/${id}`, requestOptions);
+            const response = await fetch(`${apiUrl}/api/uploadformdevis/${id}`, requestOptions);
             if (!response.ok) {
               throw new Error("La requête a échoué");
             }

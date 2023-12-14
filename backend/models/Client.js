@@ -105,8 +105,9 @@ class Client {
     `;
 
     try {
-      const [result] = await db.execute(sqlGetDevis, [clientId]);
-      return result;
+      const connection = await db.execute();
+      const result = await connection.execute(sqlGetDevis, [clientId]);
+      return result[0];
     } catch (error) {
       throw error;
     }

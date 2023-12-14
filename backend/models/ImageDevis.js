@@ -11,28 +11,21 @@ class Image {
             image_data
         )
         VALUES (?)
-    `;
+        `;
 
-    const values = [
-        this.image_data
-    ]
+        const values = [
+            this.image_data
+        ]
 
-    try {
-        const [result] = await db.execute(sql, values);
-        return { insertId: result.insertId };
-    } catch(error) {
-        console.error('Model TestForm plante');
-    }
-    }
-
-    static getAllImages() {
-        const sqlImgData = 'SELECT Image.image_data FROM Image';
-        return db.query(sqlImgData);
-    }
-
-    static getAllImagesData() {
-        const sql = 'SELECT * FROM Image';
-        return db.query(sql);
+        try {
+            const connection = await db.execute();
+            const result = await connection.execute(sql, values);
+            return {...result[0], insertId: result[0].insertId };
+        } catch(error) {
+            console.error('Model TestForm plante');
+        } finally {
+            db.closeConnection();
+        }
     }
 
     static getImagesForDevis(devisId) {
@@ -41,7 +34,8 @@ class Image {
         `;
 
         try {
-            return db.query(sql, [devisId]);
+            const result = db.query(sql, [devisId])
+            return result;
         } catch (error) {
             console.error('Erreur lors de la récupération des images pour le devis', error);
             throw error;
@@ -61,10 +55,14 @@ class Image {
         const values = [devisId, this.insertId];
 
         try {
-            await db.execute(linkSql, values);
+            const connection = await db.execute();
+            const result = await connection.execute(linkSql, values);
+            return result[0];
         } catch (error) {
             console.error('link Image to Devis plante', error);
             throw error;
+        } finally {
+            db.closeConnection();
         }
     }
 

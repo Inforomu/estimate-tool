@@ -330,7 +330,6 @@ export default function FormDevis() {
                             value={observation}
                             onChange={(e) => setObservation(e.target.value)}
                         >
-
                         </textarea>
                     </div>
                     <div className="bg-white shadow-xl rounded-lg">

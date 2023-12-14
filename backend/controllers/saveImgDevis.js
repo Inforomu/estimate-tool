@@ -52,6 +52,7 @@ exports.getImagesForDevis = async (req, res) => {
     try {
         const devisId = req.params.devisId;
         const devisImages = await Image.getImagesForDevis(devisId);
+        console.log(devisImages)
         res.json({ images: devisImages });
     } catch (error) {
         console.error('Erreur lors de la récupération des images pour le devis', error);

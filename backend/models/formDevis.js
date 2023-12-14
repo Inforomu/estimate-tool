@@ -58,10 +58,13 @@ class DevisData {
         ];
 
         try {
-            const [result] = await db.execute(sql, values);
-            return { insertId: result.insertId };
+            const connection = await db.execute();
+            const result = await connection.execute(sql, values);
+            return {...result[0], insertId: result[0].insertId };
         } catch (error) {
             throw error;
+        } finally {
+            db.closeConnection();
         }
     }
 
@@ -70,10 +73,13 @@ class DevisData {
         SELECT Devis.id, Devis.power_contract, Devis.power_yg, Devis.contract, Devis.electric_controller, Devis.telereport, Devis.wifi, Devis.mobile, Devis.ground_res, Devis.neutral_system, Devis.breaker, Devis.distance, Devis.secure, Devis.type_e, Devis.dispo_td, Devis.power_charging, Devis.charge_points, Devis.box_nb, Devis.observation, Users.email AS user_email, Clients.email AS client_email, Clients.ville AS client_ville, Clients.zipcode AS client_zipcode FROM Devis INNER JOIN Users ON Devis.author_id = Users.id LEFT JOIN Clients ON Devis.client_id = Clients.id;
         `;
         try {
-            const [result] = await db.execute(sql);
-            return result;
+            const connection = await db.execute();
+            const result = await connection.execute(sql);
+            return result[0];
         } catch (error) {
             throw error;
+        } finally {
+            db.closeConnection();
         }
     }
 
@@ -89,10 +95,13 @@ class DevisData {
           `;
     
         try {
-          const result = await db.execute(sql, [id]);
-          return result;
+            const connection = await db.execute();
+            const result = await connection.execute(sql, [id]);
+            return result;
         } catch (error) {
           throw error
+        } finally {
+            db.closeConnection();
         }
     }
 
@@ -109,10 +118,13 @@ class DevisData {
         const values = fieldNames.map((fieldName) => updatedFields[fieldName]);
         values.push(id);
         try {
-            const result = await db.execute(sql, values);
-            return result;
+            const connection = await db.execute();
+            const result = await connection.execute(sql, values);
+            return result[0];
         } catch (error) {
             throw error;
+        } finally {
+            db.closeConnection();
         }
     }
 
@@ -127,10 +139,13 @@ class DevisData {
         const updateValues = [this.id, imageId];
 
         try {
-            const [result] = await db.execute(linkSql, updateValues);
-            return { insertId: result.insertId };
+            const connection = await db.execute();
+            const result = await connection.execute(linkSql, updateValues);
+            return  {...result[0], insertId: result[0].insertId };
         } catch (error) {
             throw error;
+        } finally {
+            db.closeConnection();
         }
     }
 }

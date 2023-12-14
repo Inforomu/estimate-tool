@@ -22,12 +22,14 @@ export default function cardDevisDetail({ devis, returnPath }) {
         })
         .then((response) => {
           if (!response.ok) {
-            console.log('Ca plante devis detail');
+            console.log('Ca plante devis detail', response);
           }
           return response.json();
         })
         .then((data) => {
-          setImgUrls(data.images[0]);
+          setImgUrls(data.images);
+		  console.log(imgUrls);
+
         })
         .catch((error) => {
           console.log('Ca plante api cdd');
@@ -205,7 +207,7 @@ export default function cardDevisDetail({ devis, returnPath }) {
                         </button>
                     </div>
                     <div className={`popup ${popUp ? 'visible' : 'hidden'}`}>
-                        {imgUrls.length > 0 ? (
+                        {imgUrls && imgUrls.length > 0 ? (
                             <div className="popup-content">
 							<span className='popup-close w-20' onClick={onClosePopUp}>
 								<img src={ClosePopUpPng} alt="" />
