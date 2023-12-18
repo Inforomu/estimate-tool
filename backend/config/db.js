@@ -5,7 +5,7 @@ const { Client } = require('ssh2');
 const sshConfig = {
   host: process.env.SSH_HOST,
   username: process.env.SSH_NAME,
-  privateKey: require('fs').readFileSync('../../vale.pem')
+  privateKey: require('fs').readFileSync('./vale.pem')
 };
 
 const dbConfig = {
