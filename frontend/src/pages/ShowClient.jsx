@@ -116,7 +116,7 @@ export default function showClient() {
   };
 
   return (
-    <section className='flex xl:flex-row py-5 flex-col justify-center items-center h-full w-full'>
+    <section className='flex xl:flex-row py-5 mt-10 rounded-lg flex-col justify-center items-center h-full w-full'>
       <>
         {loading ? (
           <div className="text-center w-full flex justify-center">

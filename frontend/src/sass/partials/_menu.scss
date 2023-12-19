@@ -5,6 +5,7 @@ $iconHoverBg: var(--clr);
 $iconShadowBg: #3e3f46;
 $shadowColor: rgba(0, 0, 0, 0.25);
 $shadowOffset: -150px 150px 30px;
+$text-welcome-color: #16bb1e;
 
 @mixin menuLink {
   text-decoration: none;
@@ -20,6 +21,50 @@ $shadowOffset: -150px 150px 30px;
     color: #fff;
   }
 }
+
+.container-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: -4rem;
+}
+
+.welcome {
+  margin-bottom: 100px;
+  padding: 1.5rem;
+  color: $text-welcome-color;
+  border-radius: .8rem;
+	animation: text-welcome 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  text-shadow: 1px 1px 1px #ffffff,
+  1px 2px 1px #ffffff,
+  1px 3px 1px #ffffff,
+  1px 3px 1px #ffffff,
+  1px 3px 1px #ffffff,
+  1px 14px 6px rgba(24,24,24,0.3),
+  1px 18px 10px rgba(24,24,24,0.2),
+  1px 21px 35px rgba(24,24,24,0.2),
+  1px 26px 60px rgba(24,24,24,0.4);
+
+  @media screen and (max-width: 767px) {
+    animation: none;
+  }
+}
+
+@keyframes text-welcome {
+  0% {
+    letter-spacing: 1.4rem;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+
 
 .menu {
   ul {
@@ -143,11 +188,4 @@ $shadowOffset: -150px 150px 30px;
   li:last-child::after {
     box-shadow: none;
   }
-}
-
-.welcome {
-  margin-bottom: 100px;
-  color: #333333;
-  text-shadow: 2px 2px 0px #FFFFFF, 4px 3px 0px rgba(0,0,0,0.15);
-  font-weight: 500;
 }
