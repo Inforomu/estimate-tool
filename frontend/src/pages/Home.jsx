@@ -9,6 +9,7 @@ export default function Home() {
   const [menuClients, setMenuClients] = useState(false);
   const [menuAdmin, setMenuAdmin] = useState(false);
   const [email, setEmail] = useState(null);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
 
   const activeClass = 'active';
@@ -45,16 +46,27 @@ export default function Home() {
     if (emailFromCookie) {
       setEmail(emailFromCookie);
     }
+
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className='flex flex-col menu'>
-      <div className='welcome'>
-        {email && <h2 className='text-center text-xl md:text-2xl'>Bonjours  {email}</h2>}
-      </div>
+    <div className='container-home font-varela-scss'>
+    <section className='flex flex-col items-center md:mb-20 menu'>
+    <div className='welcome'>
+        <h2 className='welcome-h2 text-center md:text-4xl'>Bonjour,</h2>
+        {email && (
+        <div>
+            <p className='text-center md:text-4xl mt-4'><span>{email}</span> il est {currentTime.toLocaleTimeString()}, bonne journée !</p>
+        </div>
+        )}
+    </div>
       <div className='flex'>
       <ul className='ml-10'>
-        <li className={menuClients ? activeClass : ''} onClick={handleMenuClients} style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i className="fa-solid fa-user"></i></span>Client</p></li>
+        <li className={menuClients ? activeClass : ''} onClick={handleMenuClients} style={{ "--i": 3, "--clr": "#08b811" }}><p><span><i className="fa-solid fa-user"></i></span>Clients</p></li>
         <li className={menuDevis? activeClass : ''} onClick={handleMenuDevis} style={{ "--i": 2, "--clr": "#25d366" }}><p><span><i className="fa-solid fa-folder"></i></span>Devis</p></li>
         {Cookies.get('role') === 'admin' && (
           <li className={menuAdmin ? activeClass : ''} onClick={handleMenuAdmin} style={{ "--i": 1, "--clr": "#c32aa3" }}><p><span><i className="fa-solid fa-screwdriver-wrench"></i></span>Admin</p></li>
@@ -91,6 +103,6 @@ export default function Home() {
       )}
       </div>
     </section>
-
+    </div>
   )
 }
